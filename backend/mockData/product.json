@@ -1,0 +1,420 @@
+[
+    {
+        "hcategory": "FF",
+        "scategory": [
+            {
+                "menu": "All",
+                "image": "https://services.kpnfresh.com/media/v1/categories/images/7e8481fb-d50a-4e1a-973a-69b9c815ab17/fresh-fruits.webp?c_type=C1"
+            },
+            {
+                "menu": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/categories/images/363b6aa0-cde4-46af-a183-dcdb91065aab/apples-pears.webp?c_type=C1"
+            },
+            {
+                "menu": "Bananas",
+                "image": "https://services.kpnfarmfresh.com/media/v1/categories/images/84810e4a-40c4-49dd-bf46-6fc7dc0ec26c/bananas.webp?c_type=C1"
+            },
+            {
+                "menu": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/categories/images/1e63777a-b182-473f-9d81-a32ff49e309b/citrus.webp?c_type=C1"
+            },
+            {
+                "menu": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/246ce1fe-7f7a-4074-8b11-6dfbff971147/honey-crisp-grapes.webp?c_type=C1"
+            }
+        ],
+        "data": [
+            {
+                "id": 1,
+                "code": "AP001",
+                "name": "Pink Lady Apple",
+                "price": "99",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/87b46eca-52ef-46db-8376-12337e82d74d/apple-green-.webp?c_type=C1"
+            },
+            {
+                "id": 2,
+                "code": "AP002",
+                "name": "Apple Royal Gala",
+                "price": "88",
+                "minWeight": "250",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/91404703-75d5-4f7d-883b-c6544ca70f4d/apple-royal-gala.webp?c_type=C1"
+            },
+            {
+                "id": 3,
+                "code": "AP003",
+                "name": "Apple Shimla",
+                "price": "300",
+                "minWeight": "270",
+                "maxWeight": "300",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/6e56c21b-2086-4d0a-b996-77621c3d5a85/apple-shimla.webp?c_type=C1"
+            },
+            {
+                "id": 4,
+                "code": "AP004",
+                "name": "Apple Royal Gala Economy - Pack of 4",
+                "price": "140",
+                "minWeight": "380",
+                "maxWeight": "300",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/0426da45-57f4-4f7b-a528-86bb3fddf86b/apple-royal-gala-economy-pack-of-4.webp?c_type=C1"
+            },
+            {
+                "id": 5,
+                "code": "AP005",
+                "name": "Apple Washington",
+                "price": "110",
+                "minWeight": "380",
+                "maxWeight": "300",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/4a98b505-892f-43b9-b08a-aa896ae34a5d/apple-washington.webp?c_type=C1"
+            },
+            {
+                "id": 6,
+                "code": "AP006",
+                "name": "Apple Shimla Economy",
+                "price": "110",
+                "minWeight": "380",
+                "maxWeight": "300",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/4eb2b9b8-206c-41e8-99f2-5e466b277df9/apple-shimla-economy.webp?c_type=C1"
+            },
+            {
+                "id": 7,
+                "code": "AP007",
+                "name": "Pear Green",
+                "price": "110",
+                "minWeight": "300",
+                "maxWeight": "400",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/45a8247d-f11c-4c90-8115-2fb78a86953d/pear-green.webp?c_type=C1"
+            },
+            {
+                "id": 8,
+                "code": "AP008",
+                "name": "Apple Iran",
+                "price": "110",
+                "minWeight": "300",
+                "maxWeight": "400",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Apples & Pears",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/8c506a06-0852-4b10-8c79-9795e14f8af6/apple-iran.webp?c_type=C1"
+            },
+            {
+                "id": 1,
+                "code": "BA001",
+                "name": "Banana Elaichi (Yellaki)",
+                "price": "99",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/dc8c2f1a-d34b-4fc2-99ea-68a19b2ff6b9/banana-elaichi.webp?c_type=C1"
+            },
+            {
+                "id": 2,
+                "code": "BA002",
+                "name": "Banana Nenthiran",
+                "price": "76",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/d8742c58-99a4-47e0-8d09-c08bce753751/banana-nenthiran-semi-ripe.webp?c_type=C1"
+            },
+            {
+                "id": 3,
+                "code": "BA003",
+                "name": "Banana Poovan",
+                "price": "94",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/8104dabc-33b1-4584-988d-d9fc69e297df/banana-poovan-semi-ripe.webp?c_type=C1"
+            },
+            {
+                "id": 4,
+                "code": "BA004",
+                "name": "Banana Fresh Hill - Semi Ripe",
+                "price": "79",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/856d623c-5d4f-471a-9b95-ba5e02e4ba8e/banana-fresh-hill-semi-ripe.webp?c_type=C1"
+            },
+            {
+                "id": 5,
+                "code": "BA005",
+                "name": "Banana Robusta",
+                "price": "49",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/e5e10e93-4e7e-49a7-8b18-5eabc9fa9a28/morris-banana-robusta.webp?c_type=C1"
+            },
+            {
+                "id": 6,
+                "code": "BA006",
+                "name": "Banana Karpooravalli",
+                "price": "89",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/43a8de56-7c8d-4322-afe9-9223c4cfcd75/banana-karpooravalli.webp?c_type=C1"
+            },
+            {
+                "id": 7,
+                "code": "BA007",
+                "name": "Banana Red",
+                "price": "89",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/c15c2d68-33dc-41b9-8672-21eb6bb0a2d2/banana-red-sevvalai-.webp?c_type=C1"
+            },
+            {
+                "id": 8,
+                "code": "BA008",
+                "name": "Banana Raw",
+                "price": "89",
+                "minWeight": "300",
+                "maxWeight": "360",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Bananas",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/e39525c9-4e47-46b0-bc0e-40119a85d154/banana-raw.webp?c_type=C1"
+            },
+            {
+                "id": 1,
+                "code": "CI001",
+                "name": "Orange Australia",
+                "price": "29",
+                "minWeight": "340",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/0e5dfae7-51ab-404f-a157-f13550575c0f/orange-australia.webp?c_type=C1"
+            },
+            {
+                "id": 2,
+                "code": "CI002",
+                "name": "Sweet Lime",
+                "price": "79",
+                "minWeight": "300",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/32b24075-89fc-4314-8881-2d7d5a6a6e9e/sweet-lime-sathkudi.webp?c_type=C1"
+            },
+            {
+                "id": 3,
+                "code": "CI003",
+                "name": "Grape Fruit",
+                "price": "99",
+                "minWeight": "370",
+                "maxWeight": "490",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/9cd0fe6d-6e52-49a9-ac3e-ca1f1f9008f3/grape-fruit.webp?c_type=C1"
+            },
+            {
+                "id": 4,
+                "code": "CI004",
+                "name": "Orange Mandarin",
+                "price": "39",
+                "minWeight": "390",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/309c024b-b89b-47fd-85cf-98fb1ecf7c39/orange-mandarin.webp?c_type=C1"
+            },
+            {
+                "id": 5,
+                "code": "CI005",
+                "name": "Orange Nagpur",
+                "price": "29",
+                "minWeight": "330",
+                "maxWeight": "370",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/92bbd39e-2931-4175-b26c-934eecdbabd6/orange-nagpur.webp?c_type=C1"
+            },
+            {
+                "id": 6,
+                "code": "CI006",
+                "name": "Orange Salad",
+                "price": "99",
+                "minWeight": "320",
+                "maxWeight": "480",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Citrus",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/d986186d-ebb7-4683-87e6-e50b219f1cfe/orange-salad.webp?c_type=C1"
+            },
+            {
+                "id": 1,
+                "code": "GR001",
+                "name": "Red Grapes Globe USA",
+                "price": "19",
+                "minWeight": "390",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/89ad27cb-f2a8-4a51-855a-02c45b15b9ed/grapes-red-globe-seed-usa.webp?c_type=C1"
+            },
+            {
+                "id": 2,
+                "code": "GR002",
+                "name": "Black Grapes Seedless",
+                "price": "69",
+                "minWeight": "310",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/d8dab08d-c0d0-4fb3-9e06-560ea4eb16a7/seedless-black-grapes.webp?c_type=C1"
+            },
+            {
+                "id": 3,
+                "code": "GR003",
+                "name": "Green Grapes Seedless",
+                "price": "19",
+                "minWeight": "390",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/e90fb2c9-3a10-489a-ad63-c4cac52f77a2/green-grapes-thompson.webp?c_type=C1"
+            },
+            {
+                "id": 4,
+                "code": "GR004",
+                "name": "Grape Fruit",
+                "price": "69",
+                "minWeight": "310",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/9cd0fe6d-6e52-49a9-ac3e-ca1f1f9008f3/grape-fruit.webp?c_type=C1"
+            },
+            {
+                "id": 5,
+                "code": "GR005",
+                "name": "Green Grapes Salad",
+                "price": "19",
+                "minWeight": "390",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/2d7eba6f-80f0-4d6f-84f3-5a54a66196cc/green-grapes-salad.webp?c_type=C1"
+            },
+            {
+                "id": 6,
+                "code": "GR006",
+                "name": "Black Grapes Salad",
+                "price": "69",
+                "minWeight": "310",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/cceb44ce-4ed5-4c7e-8cae-3665ddcc5bdb/black-grapes-salad.webp?c_type=C1"
+            },
+            {
+                "id": 7,
+                "code": "GR007",
+                "name": "Black Grapes",
+                "price": "19",
+                "minWeight": "390",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/7b3b9ef4-474b-4352-854b-3aebeede06fb/black-grapes.webp?c_type=C1"
+            },
+            {
+                "id": 8,
+                "code": "GR008",
+                "name": "Honey Crisp Grapes",
+                "price": "69",
+                "minWeight": "310",
+                "maxWeight": "460",
+                "unit": "2",
+                "maximumQty": "5",
+                "category": "Grapes",
+                "image": "https://services.kpnfarmfresh.com/media/v1/products/images/246ce1fe-7f7a-4074-8b11-6dfbff971147/honey-crisp-grapes.webp?c_type=C1"
+            }
+        ]
+    },
+    {
+        "hcategory": "FV",
+        "scategory": [
+            {
+                "menu": "All",
+                "image": "https://services.kpnfresh.com/media/v1/categories/images/7e8481fb-d50a-4e1a-973a-69b9c815ab17/fresh-fruits.webp?c_type=C1"
+            },
+            {
+                "menu": "Onion",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/7bdde232-92f8-4440-93df-d378d2bdf321/onion.webp?c_type=C1"
+            },
+            {
+                "menu": "Tomato",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/644bfc8b-2c6b-4949-9689-a14aa46862fb/tomato-desi.webp?c_type=C1"
+            },
+            {
+                "menu": "Potato",
+                "image": "https://services.kpnfresh.com/media/v1/products/images/3d05872a-dc36-4eee-ada5-cdda1499e657/baby-potato.webp?c_type=C1"
+            }
+        ],
+        "data": [
+            { "id": 1, "code": "POT001", "name": "Tomato Desi (Nadu Thakkali)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Tomato", "image": "https://services.kpnfresh.com/media/v1/products/images/644bfc8b-2c6b-4949-9689-a14aa46862fb/tomato-desi.webp?c_type=C1"},
+    { "id": 2, "code": "POT002", "name": "Tomato Hybrid (Bangalore Thakkali)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Tomato", "image": "https://services.kpnfresh.com/media/v1/products/images/c1a6fab1-63b2-47b2-ab3d-f4b53248939c/tomato-hybrid.webp?c_type=C1"},
+    { "id": 3, "code": "POT003", "name": "Onion (Vengayam)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Onion", "image": "https://services.kpnfresh.com/media/v1/products/images/7bdde232-92f8-4440-93df-d378d2bdf321/onion.webp?c_type=C1"},
+    { "id": 4, "code": "POT004", "name": "Potato (Urulai Kizhangu)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Potato", "image": "https://services.kpnfresh.com/media/v1/products/images/80960395-1a0d-411c-9ef3-04dd5943f93c/potato.webp?c_type=C1"},
+    { "id": 5, "code": "POT005", "name": "Fresh Sambar Onion (Chinna Vengayam)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Onion", "image": "https://services.kpnfresh.com/media/v1/products/images/7fcc1d7e-b8db-4463-b01a-19786c337de8/fresh-sambar-onion.webp?c_type=C1"},
+    { "id": 6, "code": "POT006", "name": "Baby Potato (Chinna Urulaikizhangu)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Potato", "image": "https://services.kpnfresh.com/media/v1/products/images/3d05872a-dc36-4eee-ada5-cdda1499e657/baby-potato.webp?c_type=C1"},
+    { "id": 7, "code": "POT007", "name": "White Onion (Vellai Vengayam)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Onion", "image": "https://services.kpnfresh.com/media/v1/products/images/2b4436a8-51eb-4622-96fe-bf1a6aa39768/white-onion.webp?c_type=C1"},
+    { "id": 8, "code": "POT008", "name": "Chinese Potato (Koorka)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Potato", "image": "https://services.kpnfresh.com/media/v1/products/images/f7cf9159-24f8-4b80-83cf-7b20d6e57bcf/chinese-potato.webp?c_type=C1"},
+    { "id": 9, "code": "POT009", "name": "Tomato Green (Pachai Thakkali)", "price": "1", "minWeight": "110", "maxWeight": "260", "unit": "2", "maximumQty": "5", "category": "Tomato", "image": "https://services.kpnfresh.com/media/v1/products/images/fadaae45-9660-458c-bfc0-d8d2fc1e3329/tomato-green.webp?c_type=C1"}        ]
+    }
+]

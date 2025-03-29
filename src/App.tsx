@@ -343,19 +343,20 @@ const App: React.FC = () => {
         onConfirm={handleConfirm}
         onOtpConfirm={onOtpConfirm} // Pass the callback
       />
-
+{quantity && quantity.length > 0 && (
       <ViewCartAtBottom
-        routeFlag={routeFlag}
-        quantity={quantity}
-        style={{
-          bottom: 0, // Custom bottom value
-          zIndex: 1000, // Ensure it stays on top
-          backgroundColor: '#f8f8f8', // Light gray background
-          height: 80, // Adjust height if necessary
-        }}
-        viewCartBottomChange={handleViewCartBottomChange}
-        payableAmount={grandTotal}
-      />
+      routeFlag={routeFlag}
+      quantity={quantity}
+      style={{
+        bottom: 0, // Custom bottom value
+        zIndex: 1000, // Ensure it stays on top
+        backgroundColor: '#f8f8f8', // Light gray background
+        height: 80, // Adjust height if necessary
+      }}
+      viewCartBottomChange={handleViewCartBottomChange}
+      payableAmount={grandTotal}
+    />
+)}
 
       <footer>
         <AppFooterSection routeFlag={routeFlag} />
@@ -413,15 +414,15 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
       const cartItems = JSON.parse(
         sessionStorage.getItem('cartItemCount') || 'null'
       );
-      if (cartItems.length > 0) {
+      if (cartItems && cartItems.length > 0) {
         const objCartItems: any[] = [];
         objCartItems.push(cartItems);
         cartItemdata(objCartItems);
       } else {
-        cartItemdata([]);
+        cartItemdata(null);
       }
     } else {
-      cartItemdata([]);
+      cartItemdata(null);
     }
     debugger;
     if (loggedUserData) {

@@ -20,13 +20,70 @@ const MdCategoryScroller: FC<MdCategoryScrollerProps> = () =>{
 
        return  (
          <MdCategoryScrollerWrapper data-testid="MdCategoryScroller">
-                  <div className="lg:pt-3 pb-2">
-        <div className="w-full pb-1 lg:pb-1">
+                  <div className="lg:pt-3 pb-0">
+                  <main className="p-0 space-y-4 pt-0 pb-0">
+  <div className="w-full z-10 h-[300px] bg-green-700"> {/* Adjust height as needed */}
+    <Swiper
+      modules={[Autoplay]}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      spaceBetween={50}
+      slidesPerView={1}
+      loop={true}
+      className="z-0 h-full" 
+    >      <SwiperSlide className="h-full flex items-center justify-center">
+    <img 
+      src="https://cdn.intellemo.ai/int-stock/618e0dfef844f6e433a9587f/618e0dfff844f6e433a95880-v334/bringing_fresh_fruits_l.jpg"
+      alt="Slide 3"
+      className="w-full h-full object-cover"
+    />
+  </SwiperSlide>
+      <SwiperSlide className="h-full flex items-center justify-center">
+        <img 
+          src="https://i.pinimg.com/736x/f7/b5/97/f7b597493cbd83ce92e2c7a0df0c7b4c.jpg" 
+          alt="Slide 1" 
+          className="w-full h-full object-cover"
+        />
+      </SwiperSlide>
+      <SwiperSlide className="h-full flex items-center justify-center">
+        <img 
+          src="https://i.pinimg.com/736x/04/8e/66/048e662532e17355e9e426744b82c2ee.jpg" 
+          alt="Slide 2"
+          className="w-full h-full object-cover"
+        />
+      </SwiperSlide>
+      <SwiperSlide className="h-full flex items-center justify-center">
+        <img 
+          src="https://i.pinimg.com/736x/cf/98/c3/cf98c3b94def79439808d0a1a7de0b46.jpg" 
+          alt="Slide 3"
+          className="w-full h-full object-cover"
+        />
+      </SwiperSlide>
+      <SwiperSlide className="h-full flex items-center justify-center">
+        <img 
+          src="https://www.creativehatti.com/wp-content/uploads/edd/2022/06/Banner-template-of-fresh-fruits-and-vegetables-16-large.jpg"
+          alt="Slide 3"
+          className="w-full h-full object-cover"
+        />
+      </SwiperSlide>
+      <SwiperSlide className="h-full flex items-center justify-center">
+        <img 
+          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fruits-%26-vegetables-shop-ad-design-template-a3151298c6e271a0ec9139d0eb2017fe_screen.jpg?ts=1613202719"
+          alt="Slide 3"
+          className="w-full h-full object-cover"
+        />
+      </SwiperSlide>
+    </Swiper>
+  </div>
+</main>
+        <div className="w-full pb-1 lg:pb-1 hidden">
         <div className="-ml-4 -mr-4 h-[230px] bg-cover bg-center bg-no-repeat py-4 pl-4 bg-[url(https://t3.ftcdn.net/jpg/01/45/59/12/240_F_145591293_3fUNngBm3W7XGHaZJUW28wcI3JEapLfi.jpg)]">
-        <div className='text-center'><span className='text-3xl'>𝐹𝓇𝑒𝓈𝒽 𝐹𝒾𝓃𝒹𝓈, 𝐸𝓋𝑒𝓇𝓎 𝒯𝒾𝓂𝑒</span></div>
+        <div className='text-center' ><span className='text-3xl'>𝐹𝓇𝑒𝓈𝒽 𝐹𝒾𝓃𝒹𝓈, 𝐸𝓋𝑒𝓇𝓎 𝒯𝒾𝓂𝑒</span></div>
         <div className="flex flex-col justify-end">
         <div className="pb-2">
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto hidden">
               <div className="flex space-x-1 p-1">
                 {categories.map((category) => (
                   <div
@@ -46,25 +103,8 @@ const MdCategoryScroller: FC<MdCategoryScrollerProps> = () =>{
               </div>
             </div>
           </div>
-          <main className="p-0 space-y-4 pt-3 pb-3">
-          <div className="w-full z-10">
-            <Swiper
-                       modules={[Autoplay]} // Include the autoplay module
-                       autoplay={{
-                         delay: 3000, // Delay between slides in milliseconds (3 seconds)
-                         disableOnInteraction: false, // Keeps autoplay active after user interaction
-                       }}
-                       spaceBetween={50} // Space between slides
-                       slidesPerView={1} // Number of slides visible at a time
-                       loop={true} // Enable infinite looping
-                       className='z-0'
-            >
-              <SwiperSlide><img src="https://vegease.in/blog/wp-content/uploads/slider/cache/99ae52b073860b250e3a927714f2fbeb/cebd4da9-213f-47ef-872e-6d609df7b1fb.jpg" alt="Slide 1" /></SwiperSlide>
-              <SwiperSlide><img src="https://www.dryfruithub.com/image/cache/catalog/Slider/9-1349x407.jpg" alt="Slide 2"/></SwiperSlide>
-              <SwiperSlide><img src="https://cdn.shopify.com/s/files/1/0278/2307/9508/files/Slider-_5.jpg?v=1644055205"></img></SwiperSlide>
-            </Swiper>
-            </div>
-          </main>
+{/* swipper */}
+
         </div>
         </div>
         </div>
