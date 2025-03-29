@@ -30,6 +30,10 @@ import ViewOrderComponent from './components/viewOrderComponent/viewOrderCompone
 import AppFooterSection from './components/AppFooterSection/AppFooterSection';
 import MapLibreMap from './components/MapComponent/MapComponent';
 import MapLibreWithSuggestions from './components/MapComponent/MapComponent';
+import TermsOfUse from './components/TermsOfUse/TermsOfUse';
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
+import RefundPolicy from './components/RefundPolicy/RefundPolicy';
+import FAQs from './components/FAQs/FAQs';
 // import './App.css'
 interface userProfile {
   name: any,
@@ -260,6 +264,10 @@ const App: React.FC = () => {
         <Route path="/confirmation" element={<TransactionSummary transactionId={undefined} amount={undefined} date={undefined} />} />
         <Route path="/order" element={<ViewOrderComponent />} />
         <Route path="/search" element={<ProductSearchComponent cartItemQuantity={setQuantity} />} />
+        <Route path='trems-of-use' element={<TermsOfUse />} />
+        <Route path='privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='refund-policy' element={<RefundPolicy />} />
+        <Route path='faq' element={<FAQs />} />
       </Routes>
       <TosatNotifyCommon
         ref={childRef}
