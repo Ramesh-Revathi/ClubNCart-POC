@@ -79,4 +79,7 @@ export function getAddressForCart(mobile: any): AxiosPromise<any> {
   return axiosClient.post('http://localhost:5000/getAddressForCart', mobile);
 }
 
+export function getProductByHcode(code: any): AxiosPromise<any> {
+  return axiosClient.post('http://localhost:5000/getProductByHcode', code);
+}
 

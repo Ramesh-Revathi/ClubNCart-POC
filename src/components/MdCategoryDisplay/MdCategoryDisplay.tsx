@@ -9,42 +9,42 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
       [
          {
            id: 1,
-           code:'ff1',
+           code:'FF',
            name: "Fresh Fruits",
            price: "$199",
            image: "https://services.kpnfarmfresh.com/media/v1/categories/images/883ea6ac-d23a-42fe-a9bd-494cdd8b3e1d/fresh-fruits-6.webp?c_type=C3",
          },
          {
            id: 2,
-           code:'fv2',
+           code:'FV',
            name: "Fresh Vegetables",
            price: "$299",
            image: "https://services.kpnfarmfresh.com/media/v1/categories/images/45df68d6-34fc-4cf0-beb9-a13da31c876c/fresh-vegetables-6.webp?c_type=C3",
          },
          {
            id: 3,
-           code:'EX3',
+           code:'EX',
            name: "Exotics",
            price: "$99",
            image: "https://services.kpnfarmfresh.com/media/v1/categories/images/93737912-9d06-4c7b-afcd-e7c9161bc782/exotics.webp?c_type=C3",
          },
          {
            id: 4,
-           code:'LV4',
+           code:'LV',
            name: "Leafy Vegetables",
            price: "$49",
            image: "https://services.kpnfarmfresh.com/media/v1/categories/images/cf284654-6591-4d61-afce-af1dc4fe7092/leafy-vegetables.webp?c_type=C3",
          },
          {
             id: 5,
-            code:'SJ5',
+            code:'SJ',
             name: "Salads & Juices",
             price: "$49",
             image: "https://services.kpnfresh.com/media/v1/categories/images/0db193b7-4b40-4453-9f83-9a7aa99d70ce/salads-juices.webp?c_type=C3",
           },
           {
             id: 6,
-            code:'RF6',
+            code:'RF',
             name: "Regional Favourites",
             price: "$49",
             image: "https://services.kpnfresh.com/media/v1/categories/images/e5b5f39f-aca8-4744-9a10-2aaacdf56cad/regional-produce-.webp?c_type=C3",
@@ -52,7 +52,7 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
        ],"categoryName":"Fruits & Vegetables"},
       {"categoryList":[{
            id: 1,
-           code:'RF6',
+           code:'DEB',
            name: "Dairy Eggs & Breads",
            price: "$199",
            image: "https://services.kpnfresh.com/media/v1/categories/images/3ddf0635-9f91-4694-91c8-023dc65bd956/dairy-eggs-bread.webp?c_type=C3",
@@ -65,14 +65,14 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
          },
         {
            id: 3,
-           code:'RF6',
+           code:'RA',
            name: "Rice & Atta",
            price: "$199",
            image: "https://services.kpnfresh.com/media/v1/categories/images/e43153e6-da36-424a-aae0-5832f9e5ee88/rice-atta-dals.webp?c_type=C3",
          },
         {
            id: 4,
-           code:'RF6',
+           code:'EOG',
            name: "Edible Oil & Ghee",
            price: "$199",
            image: "https://services.kpnfresh.com/media/v1/categories/images/6c7a3e89-a075-4b60-b3e4-7bc58523d157/edible-oil-ghee.webp?c_type=C3",
@@ -108,7 +108,7 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
       {
          id: 1,
          name: "Fresh Fruits",
-         price: "$199",
+         price: "FF",
          image: "https://services.kpnfarmfresh.com/media/v1/categories/images/883ea6ac-d23a-42fe-a9bd-494cdd8b3e1d/fresh-fruits-6.webp?c_type=C3",
       },
       {
@@ -144,12 +144,12 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
    ];
    return (
       <MdCategoryDisplayWrapper data-testid="MdCategoryDisplay">
-         <div className="pb-0 bg-white-100 min-h-screen pt-36">
+         <div className="pb-0 bg-green-100 min-h-screen pt-0 p-2">
             {data.map((category) => (
-               <div className="pb-4">
+               <div className="pb-4 pt-3">
                   <div className="pb-4 text-base font-medium flex justify-center items-center">
                      <span style={{ color: 'black' }}>{category.categoryName}</span>
-                     <div className="border-t flex-1 ml-4 border-gray-border_100">
+                     <div className="border-t flex-1 ml-4 border-black-border_700">
                      </div></div>
                   <div className="grid grid-cols-3 gap-3 sm:grid-cols-3 md:grid-cols-4">
 

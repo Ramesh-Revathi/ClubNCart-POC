@@ -20,6 +20,7 @@ app.use(express.json());
 const dataFilePath = path.resolve(__dirname, "mock/profile.json");
 const cartFilePath = path.resolve(__dirname, "mock/cart.json");
 const orderFilePath = path.resolve(__dirname, "mock/order.json");
+const productFilePath = path.resolve(__dirname, "mockData/product.json");
 
 // API to read data from the JSON file
 app.get("/read-data", (req: Request, res: Response) => {
@@ -641,6 +642,36 @@ app.post("/getAddressForCart", (req: Request, res: Response): void => {
         }
     });
 });
+
+app.post("/getProductByHcode", (req: Request, res: Response) => {
+    const { code } = req.body;
+
+    fs.readFile(productFilePath, "utf8", (err, fileData) => {
+        if (err) {
+            return res.status(500).json({ message: "Error reading file" });
+        }
+
+        let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+        console.log("jsondata",jsonData);
+        // Find if the user already exists based on mobile
+        if(jsonData.length>0){
+            const product:any = jsonData.find(prod => prod.hcategory === code);
+            console.log("product",product);
+            console.log("product?.length",product?.data?.length);
+            if(product === undefined){
+                return res.json({ message: "No Product Available", productlist:[] });
+            }
+            else if(product != null){
+                return res.json({ message: "success", productlist:product });
+            }else{
+                return res.json({ message: "No Product Available", productlist:[] });
+            }
+        }else{
+            return res.json({ message: "No Product Available", productlist:[] });
+        }
+    });
+});
+
 
 // Start the server
 app.listen(PORT, () => {

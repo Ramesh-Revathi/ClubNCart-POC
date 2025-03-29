@@ -124,7 +124,7 @@ const handleRemoveQuantityChange = async ({ quantity, product }: { quantity: num
     <productListDisplayChildWrapper data-testid="productListDisplayChild">
   {/* Main Content */}
   <main
-    className="flex-1 p-1 overflow-y-auto"
+    className="flex-1 p-1 overflow-y-auto bg-green-100"
     style={{ height: "auto", paddingBottom: "0" }} // Adjust height and padding
   >
     {/* Product Grid */}

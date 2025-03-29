@@ -8,7 +8,7 @@ const MdNavBar: FC<MdNavBarProps> = () => (
  <MdNavBarWrapper data-testid="MdNavBar">
   <div className="fixed left-0 bottom-0 w-full z-zIndexMobileFooterBar" style={{zIndex: 1000}}>
     <div className="lg:hidden h-[72px] px-2 w-full bg-white z-zIndexMobileFooterBar shadow-custom border-t border-gray-200">
-      <ul className="flex h-full w-full justify-between items-center">
+      <ul className="flex h-full w-full justify-between items-center pl-[0px]">
         <li className="h-full">
           <a style={{ textDecoration: "none" }} className="flex flex-col justify-center items-center h-full" href="#">
           <div className="hover:bg-orange-300 bg-white-300 rounded-2xl w-12 flex justify-center items-center py-1.5 min-h-[38px]">
