@@ -102,12 +102,13 @@ app.post("/saveuser", (req: Request, res: Response) => {
         };
 
         jsonData.push(newUserData);
+        const existingUserFromProfile = jsonData.find(user => user.mobile === mobile);
 
         fs.writeFile(dataFilePath, JSON.stringify(jsonData, null, 4), (writeErr) => {
             if (writeErr) {
                 return res.status(500).json({ message: "Error writing file" });
             }
-            res.json({ message: "User added successfully",user:newUserData });
+            res.json({ message: "User added successfully",user:existingUserFromProfile });
         });
     });
 });
