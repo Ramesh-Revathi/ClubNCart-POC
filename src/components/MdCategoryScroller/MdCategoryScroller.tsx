@@ -22,7 +22,7 @@ const MdCategoryScroller: FC<MdCategoryScrollerProps> = () =>{
          <MdCategoryScrollerWrapper data-testid="MdCategoryScroller">
                   <div className="lg:pt-3 pb-0">
                   <main className="p-0 space-y-4 pt-0 pb-0">
-  <div className="w-full z-10 h-[300px] bg-green-700"> {/* Adjust height as needed */}
+  <div className="w-full z-10 h-[300px] relative bg-gradient-to-b from-green-600 to-green-700">
     <Swiper
       modules={[Autoplay]}
       autoplay={{
@@ -32,52 +32,40 @@ const MdCategoryScroller: FC<MdCategoryScrollerProps> = () =>{
       spaceBetween={50}
       slidesPerView={1}
       loop={true}
-      className="z-0 h-full" 
-    >      <SwiperSlide className="h-full flex items-center justify-center">
-    <img 
-      src="https://cdn.intellemo.ai/int-stock/618e0dfef844f6e433a9587f/618e0dfff844f6e433a95880-v334/bringing_fresh_fruits_l.jpg"
-      alt="Slide 3"
-      className="w-full h-full object-cover"
-    />
-  </SwiperSlide>
-      <SwiperSlide className="h-full flex items-center justify-center">
-        <img 
-          src="https://i.pinimg.com/736x/f7/b5/97/f7b597493cbd83ce92e2c7a0df0c7b4c.jpg" 
-          alt="Slide 1" 
-          className="w-full h-full object-cover"
-        />
-      </SwiperSlide>
-      <SwiperSlide className="h-full flex items-center justify-center">
-        <img 
-          src="https://i.pinimg.com/736x/04/8e/66/048e662532e17355e9e426744b82c2ee.jpg" 
-          alt="Slide 2"
-          className="w-full h-full object-cover"
-        />
-      </SwiperSlide>
-      <SwiperSlide className="h-full flex items-center justify-center">
-        <img 
-          src="https://i.pinimg.com/736x/cf/98/c3/cf98c3b94def79439808d0a1a7de0b46.jpg" 
-          alt="Slide 3"
-          className="w-full h-full object-cover"
-        />
-      </SwiperSlide>
-      <SwiperSlide className="h-full flex items-center justify-center">
-        <img 
-          src="https://www.creativehatti.com/wp-content/uploads/edd/2022/06/Banner-template-of-fresh-fruits-and-vegetables-16-large.jpg"
-          alt="Slide 3"
-          className="w-full h-full object-cover"
-        />
-      </SwiperSlide>
-      <SwiperSlide className="h-full flex items-center justify-center">
-        <img 
-          src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fruits-%26-vegetables-shop-ad-design-template-a3151298c6e271a0ec9139d0eb2017fe_screen.jpg?ts=1613202719"
-          alt="Slide 3"
-          className="w-full h-full object-cover"
-        />
-      </SwiperSlide>
+      className="h-full"
+    >
+      {[
+        "https://cdn.intellemo.ai/int-stock/618e0dfef844f6e433a9587f/618e0dfff844f6e433a95880-v334/bringing_fresh_fruits_l.jpg",
+        "https://i.pinimg.com/736x/7e/84/d6/7e84d609273c0f2cdf023012541c7ad4.jpg",
+        "https://i.pinimg.com/736x/24/a0/c6/24a0c6ff792124628ecee7d33cdb1745.jpg",
+        "https://i.pinimg.com/736x/f7/b5/97/f7b597493cbd83ce92e2c7a0df0c7b4c.jpg",
+        "https://cdn.intellemo.ai/int-stock/62a8281735233471b183176b/62a8281835233471b183176c-v570/fresh_fruits_vegetable_delivery_l.jpg",
+        "https://i.pinimg.com/736x/04/8e/66/048e662532e17355e9e426744b82c2ee.jpg",
+        "https://i.pinimg.com/736x/cf/98/c3/cf98c3b94def79439808d0a1a7de0b46.jpg",
+        "https://www.creativehatti.com/wp-content/uploads/edd/2022/06/Banner-template-of-fresh-fruits-and-vegetables-16-large.jpg",
+        "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/fruits-%26-vegetables-shop-ad-design-template-a3151298c6e271a0ec9139d0eb2017fe_screen.jpg?ts=1613202719",
+      ].map((image, index) => (
+        <SwiperSlide
+          key={index}
+          className="h-full flex items-center justify-center hover:scale-105 transition-transform duration-300"
+        >
+          <div className="relative w-full h-full">
+            <img
+              src={image}
+              alt={`Slide ${index + 1}`}
+              className="w-full h-full object-cover rounded-lg shadow-md"
+            />
+            {/* Subtle Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-50 to-green-100 opacity-30"></div>
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
+    {/* Decorative Shadow */}
+    <div className="absolute bottom-0 w-full h-[50px] bg-green-900 shadow-lg"></div>
   </div>
 </main>
+
         <div className="w-full pb-1 lg:pb-1 hidden">
         <div className="-ml-4 -mr-4 h-[230px] bg-cover bg-center bg-no-repeat py-4 pl-4 bg-[url(https://t3.ftcdn.net/jpg/01/45/59/12/240_F_145591293_3fUNngBm3W7XGHaZJUW28wcI3JEapLfi.jpg)]">
         <div className='text-center' ><span className='text-3xl'>𝐹𝓇𝑒𝓈𝒽 𝐹𝒾𝓃𝒹𝓈, 𝐸𝓋𝑒𝓇𝓎 𝒯𝒾𝓂𝑒</span></div>

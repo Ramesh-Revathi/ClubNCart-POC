@@ -138,147 +138,131 @@ const ProfilePage: FC<ProfilePageProps> = () => {
   };
   
   return (
-    <ProfilePageWrapper data-testid="ProfilePage">
-      <div>
-        <div className="bg-white p-3 shadow-md">
-          <div className="flex justify-between">
-            <div className="flex gap-3">
-            <Link className='text-gray-700' style={{ textDecoration: 'none' }} to={`/`}>
-              <ArrowBackIcon />
-              </Link>
-              <h5>Profile</h5>
-            </div>
-            <SearchIcon />
-          </div>
+<ProfilePageWrapper data-testid="ProfilePage">
+  <div>
+    {/* Header Section */}
+    <div className="bg-gradient-to-r from-green-300 via-white to-green-200 p-3 shadow-xl rounded-lg">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <Link
+            className="text-gray-700 flex items-center hover:text-green-600 transition-colors duration-300"
+            style={{ textDecoration: 'none' }}
+            to={`/`}
+          >
+            <ArrowBackIcon className="transform hover:scale-110 transition-transform duration-300" />
+          </Link>
+          <h5 className="text-lg font-semibold text-gray-800">Profile</h5>
         </div>
-        <div className="bg-gradient-to-r from-orange-100 to-yellow-50 m-4 p-3 rounded">
-          <div className="flex flex-col text-sm">
-            <span>Hello</span> <span className="text-md">{user?.name || 'N/A'}</span>
-            <span className="text-gray-500">{user?.mobile || 'N/A'}</span>
-          </div>
-          <div className="w-3/4 h-[2px] bg-gradient-to-r from-yellow-500 my-2 to-yellow-100"></div>
-          <div className="flex flex-col">
-            <span className="text-gray-400 text-sm">
-              Your total savings from{' '}
-              <span className="text-gray-600">{profileCard.orders} orders</span>{' '}
-              is
-            </span>
-            <span>₹{profileCard.savings}</span>
-          </div>
-        </div>
-
-        {/* Pages Accordion */}
-        <div id="accordion-collapse" data-accordion="collapse" className="m-4">
-          {PagesAccordionItems.map((item, index) => (
-            <div
-              key={index}
-              className={`border border-gray-200 hover:bg-yellow-100 ${
-                index === PagesAccordionItems.length - 1 ? 'rounded-b-xl' : ''
-              } ${index === 0 ? 'rounded-t-xl' : ''}`}
-            >
-              <h2 id={`accordion-collapse-heading-${index}`}>
-                <button
-                  type="button"
-                  className={`flex items-center justify-between w-full font-normal p-3 ${
-                    index === 0 ? 'rounded-t-xl' : ''
-                  } gap-3`}
-                  onClick={() => handleNavigation(item.path)} // Navigate on click
-                  aria-expanded={false}
-                  aria-controls={`accordion-collapse-body-${index}`}
-                >
-                  <span className="text-sm">{item.title}</span>
-                  <svg
-                    className="w-3 h-3 shrink-0"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 6 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="0.5"
-                      d="M1 9l4-4-4-4"
-                    />
-                  </svg>
-                </button>
-              </h2>
-            </div>
-          ))}
-        </div>
-
-        {/* Policies Accordion */}
-        <div id="accordion-collapse" data-accordion="collapse" className="m-4">
-          {PoliciesAccordionItems.map((item, index) => (
-            <div
-              key={index}
-              className={`border border-gray-200 hover:bg-yellow-100 ${
-                index === PoliciesAccordionItems.length - 1 ? 'rounded-b-xl' : ''
-              } ${index === 0 ? 'rounded-t-xl' : ''}`}
-            >
-              <h2 id={`accordion-collapse-heading-${index}`}>
-                <button
-                  type="button"
-                  className={`flex items-center justify-between w-full font-normal p-3 ${
-                    index === 0 ? 'rounded-t-xl' : ''
-                  } gap-3`}
-                  onClick={() => handleNavigation(item.path)} // Navigate on click
-                  aria-expanded={false}
-                  aria-controls={`accordion-collapse-body-${index}`}
-                >
-                  <span className="text-sm">{item.title}</span>
-                  <svg
-                    className="w-3 h-3 shrink-0"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 6 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="0.5"
-                      d="M1 9l4-4-4-4"
-                    />
-                  </svg>
-                </button>
-              </h2>
-            </div>
-          ))}
-        </div>
-        <div data-accordion="collapse" className="m-4">
-          <div className="border border-gray-200 hover:bg-yellow-100 rounded-b-xl">
-            <h2>
-              <button
-                type="button"
-                className="flex items-center justify-between w-full font-normal p-3 gap-3 bg-red-500 text-white rounded-md hover:bg-red-600"
-                onClick={applogout} // Replace with actual logout functionality
-                aria-expanded={false}
-              >
-                <span className="text-sm">Logout</span>
-                <svg
-                  className="w-3 h-3 shrink-0"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5"
-                  />
-                </svg>
-              </button>
-            </h2>
-          </div>
-        </div>
+        <SearchIcon className="text-gray-600 hover:text-green-600 transform hover:scale-110 transition-transform duration-300 cursor-pointer" />
       </div>
-    </ProfilePageWrapper>
+    </div>
+
+    {/* User Info Card */}
+    <div className="bg-gradient-to-r from-green-100 to-green-50 m-4 p-6 rounded-lg shadow-xl">
+      <div className="flex flex-col text-sm text-gray-700">
+        <span className="text-lg font-semibold text-green-700">Hello</span>
+        <span className="text-2xl font-bold text-gray-800">{user?.name || 'N/A'}</span>
+        <span className="text-gray-500">{user?.mobile || 'N/A'}</span>
+      </div>
+      <div className="w-full h-[2px] bg-gradient-to-r from-green-500 to-green-300 my-4"></div>
+      <div className="flex flex-col">
+        <span className="text-gray-500 text-sm">
+          Your total savings from{' '}
+          <span className="text-gray-700 font-semibold">{profileCard.orders} orders</span>{' '}
+          is
+        </span>
+        <span className="text-3xl font-bold text-green-700">₹{profileCard.savings}</span>
+      </div>
+    </div>
+
+    {/* Pages Accordion */}
+    <div id="accordion-collapse" className="m-4 space-y-3">
+      {PagesAccordionItems.map((item, index) => (
+        <div
+          key={index}
+          className={`bg-gradient-to-r from-green-100 to-green-50 rounded-lg shadow-md transform hover:scale-105 hover:shadow-xl transition-transform duration-300`}
+        >
+          <button
+            className="flex items-center justify-between w-full text-gray-800 px-4 py-3 text-lg hover:text-green-700"
+            onClick={() => handleNavigation(item.path)}
+          >
+            <span>{item.title}</span>
+            <svg
+              className="w-4 h-4 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                d="M1 9l4-4-4-4"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              />
+            </svg>
+          </button>
+        </div>
+      ))}
+    </div>
+
+    {/* Policies Accordion */}
+    <div id="accordion-collapse" className="m-4 space-y-3">
+      {PoliciesAccordionItems.map((item, index) => (
+        <div
+          key={index}
+          className={`bg-gradient-to-r from-green-100 to-green-50 rounded-lg shadow-md transform hover:scale-105 hover:shadow-xl transition-transform duration-300`}
+        >
+          <button
+            className="flex items-center justify-between w-full text-gray-800 px-4 py-3 text-lg hover:text-green-700"
+            onClick={() => handleNavigation(item.path)}
+          >
+            <span>{item.title}</span>
+            <svg
+              className="w-4 h-4 text-gray-400"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                d="M1 9l4-4-4-4"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              />
+            </svg>
+          </button>
+        </div>
+      ))}
+    </div>
+
+    {/* Logout Section */}
+    <div className="m-4">
+      <button
+        className="w-full flex items-center justify-between bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg hover:bg-red-600 transform hover:scale-105 transition-transform duration-300"
+        onClick={applogout}
+      >
+        <span className="text-lg">Logout</span>
+        <svg
+          className="w-4 h-4"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</ProfilePageWrapper>
+
   );
 };
 

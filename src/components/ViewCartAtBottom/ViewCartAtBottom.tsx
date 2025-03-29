@@ -194,197 +194,143 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
     <ViewCartAtBottomWrapper data-testid="ViewCartAtBottom">
       <div style={{ zIndex: '999' }}>
         {routeFlag === 'cart' ? (
-          <div>
-            <FreeDeliveryBanner
-              style={{
-                ...cartStyle,
-                display: hideNshow,
-                padding: '0px',
-                paddingBottom: '0px',
-                bottom: '10%',
-                zIndex: '666',
-                height: '15%',
-              }}
-            />
-            <div
-              className="flex fixed-banner shadow-custom border-t border-gray-200"
-              style={{
-                ...cartStyle,
-                display: hideNshow,
-                padding: '0px',
-                paddingBottom: '0px',
-                borderRadius: '15px',
-                height: '10%',
-                bottom: '8%',
-                backgroundColor: 'white', // Ensures solid background
-                zIndex: 1000, // Places it above other elements
-              }}
-            >
-              <div className="px-2 pt-3">
-                <div className="flex justify-between items-center">
-                  <div className="flex-1 flex gap-1 items-center font-medium">
-                    <img
-                      className="w-4 h-4"
-                      src="https://www.kpnfresh.com/_next/static/media/home_address.6f5bdad8.svg"
-                      alt="address icon"
-                    />
-                    <span className="text-md lg:text-xs text-black">
-                      {selectedAddress?.address.name || 'Loading...'}
-                    </span>
-                    <span className="text-secondary-bgcolor text-xs bg-[#d5fcf8] rounded-[4px] px-1 py-0.5">
-                      {selectedAddress?.address.addressType || 'ADDRESS'}
-                    </span>
-                  </div>
-                  <div
-                    onClick={handleChangeAddressClick}
-                    className="flex-1 text-end text-semantic-alert text-[14px] font-medium lg:text-xs cursor-pointer"
-                  >
-                    Change
-                  </div>
-                </div>
-                <div className="text-gray-500 lg:text-xs ml-5 overflow-hidden truncate w-52 text-[14px]">
-                  {selectedAddress?.address.street || 'Loading...'},{' '}
-                  {selectedAddress?.address.area || 'Loading...'}
-                </div>
+          <div
+          className="fixed-banner flex shadow-xl border-t border-gray-300"
+          style={{
+            ...cartStyle,
+            display: hideNshow,
+            padding: "0px",
+            borderRadius: "20px",
+            height: "12%",
+            bottom: "18%",
+            background: "linear-gradient(145deg, rgba(76, 175, 80, 1), rgba(102, 187, 106, 1))", // Fully opaque gradient
+            zIndex: 1000,
+            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4)", // Slightly deeper shadow
+          }}
+        >
+          <div
+            className="px-4 pt-4"
+            style={{
+              height: "160%",
+              background: "linear-gradient(145deg, rgba(76, 175, 80, 1), rgba(102, 187, 106, 1))", // Fully opaque gradient
+            }}
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex-1 flex gap-2 items-center font-medium text-white">
+                <img
+                  className="w-6 h-6 rounded-full shadow-md"
+                  src="https://www.kpnfresh.com/_next/static/media/home_address.6f5bdad8.svg"
+                  alt="address icon"
+                />
+                <span className="text-lg">
+                  {selectedAddress?.address.name || "Loading..."}
+                </span>
+                <span className="text-white bg-green-900 bg-opacity-95 text-sm rounded-lg px-2 py-1 shadow">
+                  {selectedAddress?.address.addressType || "ADDRESS"}
+                </span>
               </div>
               <div
-                className="flex justify-between items-center w-full h-full"
-                style={{ backgroundColor: 'white' }}
+                onClick={handleChangeAddressClick}
+                className="flex-1 text-end text-white text-base font-medium cursor-pointer hover:text-opacity-90 transition-all"
               >
-                <div className="flex w-full px-2">
-                  <div className="flex-1 lg:hidden cursor-pointer opacity-100">
-                    <div className="text-[14px] flex items-center gap-2">
-                      Online Payment
-                      <img
-                        className="w-5 h-5"
-                        src="https://www.kpnfresh.com/_next/static/media/up-arrow.769d33b0.svg"
-                        alt="arrow"
-                      />
-                    </div>
-                    <button
-                      style={{ textDecoration: 'none' }}
-                      className="text-semantic-alert text-[12px] mt-[-5px]"
-                      onClick={pgModeFun}
-                    >
-                      Change Payment Mode
-                    </button>
-                  </div>
-                  <div className="flex-1 flex h-full justify-between items-center rounded-lg lg:rounded-2xl bg-menuHilight py-2 px-4 cursor-pointer">
-                    <div>
-                      <div className="text-xs">Total Payable</div>
-                      <div className="text-sm font-bold text-start">
-                        <span className="ruppee-symbol-font">₹</span>
-                        {payableAmount}
-                      </div>
-                    </div>
-                    <a
-                      href="/pay"
-                      className="text-sm font-bold"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Pay Now
-                    </a>
-                  </div>
-                </div>
+                Change
               </div>
             </div>
-            {addressModalOpen && (
-              <div
-                className="fixed inset-0 bg-black bg-opacity-50 "
-                style={{ zIndex: 9999 }}
-                onClick={handleAddressModalClose}
-              >
-                <div
-                  className="bg-white rounded-lg p-4 w-full max-w-md max-h-[80vh] overflow-y-auto"
-                  style={{
-                    ...cartStyle,
-                    display: hideNshow,
-                    padding: '0px',
-                    paddingBottom: '0px',
-                    borderRadius: '15px',
-                    height: '50%',
-                    // bottom: '8%',
-                    backgroundColor: 'white', // Ensures solid background
-                    zIndex: 1000, // Places it above other elements
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg font-bold">Select Address</h2>
-                    <button
-                      onClick={handleAddressModalClose}
-                      className="text-gray-500 hover:text-gray-700"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                  <div className="space-y-3">
-                    {addresses.map((address) => (
-                      <div
-                        key={address.id}
-                        className={`p-3 border rounded-lg cursor-pointer ${
-                          selectedAddress?.id === address.id
-                            ? 'border-primary bg-blue-50'
-                            : 'border-gray-200'
-                        }`}
-                        onClick={() => handleAddressSelect(address)}
-                      >
-                        <div className="flex justify-between">
-                          <span className="font-medium">
-                            {address.address.name}
-                          </span>
-                          <span className="text-xs bg-[#d5fcf8] rounded px-1 py-0.5">
-                            {address.address.addressType}
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-600 mt-1">
-                          {address.address.street}, {address.address.area}
-                        </p>
-                        {address.address.preference === 'primary' && (
-                          <span className="text-xs text-green-600">
-                            Primary
-                          </span>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                  {/* <button
-                    className="mt-4 w-full bg-primary text-white py-2 rounded-lg"
-                    onClick={handleAddressModalClose}
-                  >
-                    Confirm Address
-                  </button> */}
-                </div>
-              </div>
-            )}
+            <div className="text-white text-opacity-95 mt-2 text-sm truncate w-full flex justify-between items-center">
+              {selectedAddress?.address.street || "Loading..."},{" "}
+              {selectedAddress?.address.area || "Loading..."}
+            </div>
           </div>
+          <div
+            className="flex justify-between items-center w-full h-full"
+            style={{
+              background: "rgba(0, 0, 0, 0.85)", // Darker semi-transparent background
+              backdropFilter: "blur(5px)", // Softer blur for readability
+              borderRadius: "5px",
+            }}
+          >
+            <div className="flex w-full px-4 items-center gap-3">
+              <div className="flex-1 text-green-100 text-base flex items-center gap-2 cursor-pointer hover:scale-105 transform transition">
+                Online Payment
+                <img
+                  onClick={pgModeFun}
+                  className="w-5 h-5 hover:rotate-90 transition-transform duration-300"
+                  src="https://www.kpnfresh.com/_next/static/media/up-arrow.769d33b0.svg"
+                  alt="arrow"
+                />
+              </div>
+              <div className="flex-1 flex justify-between items-center bg-green-700 text-white rounded-lg px-6 py-3 cursor-pointer hover:shadow-xl transition-shadow">
+                <div>
+                  <div className="text-sm">Total Payable</div>
+                  <div className="text-xl font-bold">
+                    <span className="ruppee-symbol-font">₹</span>
+                    {payableAmount}
+                  </div>
+                </div>
+                <a
+                  href="/pay"
+                  className="text-sm font-semibold text-yellow-400 underline"
+                  style={{
+                    whiteSpace: "nowrap", // Prevent text wrapping
+                  }}
+                >
+                  Pay Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>                   
         ) : routeFlag !== 'pay' ? (
           <div
-            className="flex fixed-banner shadow-custom border-t border-gray-200"
-            style={{ ...defaultStyle, ...style, display: hideNshow }} // Merge styles and control visibility
-          >
-            <div className="flex justify-between items-center w-full h-full">
-              <div className="flex-1">
-                <div className="flex">
-                  <div className="text-gray-subtext text-sm">
-                    {cartItems} Items in cart
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="font-medium text-lg">
-                    <span className="ruppee-symbol-font">₹</span> {totalAmount}
-                  </div>
-                </div>
-              </div>
-              <a
-                style={{ textDecoration: 'none' }}
-                className="flex flex-col justify-center items-center h-12 bg-menuHilight border-primary text-black-300 rounded-lg w-36"
-                href="/cart"
-              >
-                View Cart
-              </a>
-            </div>
-          </div>
+  className="flex fixed-banner shadow-xl border-t border-gray-200"
+  style={{
+    ...defaultStyle,
+    ...style,
+    display: hideNshow,
+    background: "linear-gradient(145deg, rgba(34, 139, 34, 0.9), rgba(46, 204, 113, 0.9))", // Premium green gradient
+    borderRadius: "20px",
+    padding: "10px",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)", // Deep 3D shadow
+  }}
+>
+  <div className="flex justify-between items-center w-full h-full">
+    {/* Left Section */}
+    <div className="flex-1 px-4">
+      <div className="flex items-center">
+        <div className="text-gray-100 text-sm">
+          <span className="animate-bounce">{cartItems}</span> Items in cart
+        </div>
+      </div>
+      <div className="flex items-center gap-2 mt-2">
+        <div
+          className="font-medium text-xl text-white"
+          style={{
+            textShadow: "0 3px 6px rgba(0, 0, 0, 0.5)", // Text shadow for premium feel
+          }}
+        >
+          <span className="ruppee-symbol-font">₹</span> {totalAmount}
+        </div>
+      </div>
+    </div>
+
+    {/* Right Section */}
+    <a
+      href="/cart"
+      style={{ textDecoration: "none" }}
+      className="flex flex-col justify-center items-center h-12 bg-green-600 border-green-500 text-white rounded-lg w-36 cursor-pointer transform transition-all hover:scale-105 hover:shadow-2xl hover:bg-green-700"
+    >
+      <span
+        className="font-bold text-base"
+        style={{
+          textShadow: "0 2px 5px rgba(0, 0, 0, 0.4)", // Text shadow for a glowing effect
+        }}
+      >
+        View Cart
+      </span>
+    </a>
+  </div>
+</div>
+
         ) : (
           <div></div>
         )}
@@ -394,6 +340,56 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
           totalAmount={totalAmount}
         />
       </div>
+      {addressModalOpen && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity animate-fade-in"
+    style={{ zIndex: 9999 }}
+    onClick={handleAddressModalClose}
+  >
+    <div
+      className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg transform animate-slide-up"
+      style={{ zIndex: 1000 }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-green-800">Select Address</h2>
+        <button
+          onClick={handleAddressModalClose}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          ✕
+        </button>
+      </div>
+      <div className="space-y-4">
+        {addresses.map((address) => (
+          <div
+            key={address.id}
+            className={`p-4 border rounded-lg transition-all transform ${selectedAddress?.id === address.id
+              ? "border-green-500 bg-green-50 scale-105 shadow-md"
+              : "border-gray-300"
+              }`}
+            onClick={() => handleAddressSelect(address)}
+          >
+            <div className="flex justify-between">
+              <span className="font-medium text-green-900">
+                {address.address.name}
+              </span>
+              <span className="text-xs bg-green-300 text-white rounded px-2 py-1">
+                {address.address.addressType}
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 mt-1">
+              {address.address.street}, {address.address.area}
+            </p>
+            {address.address.preference === "primary" && (
+              <span className="text-xs text-green-600">Primary</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
     </ViewCartAtBottomWrapper>
   );
 };
