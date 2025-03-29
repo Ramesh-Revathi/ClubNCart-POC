@@ -144,38 +144,47 @@ const MdCategoryDisplay: FC<MdCategoryDisplayProps> = () => {
    ];
    return (
       <MdCategoryDisplayWrapper data-testid="MdCategoryDisplay">
-         <div className="pb-0 bg-green-100 min-h-screen pt-0 p-2">
-            {data.map((category) => (
-               <div className="pb-4 pt-3">
-                  <div className="pb-4 text-base font-medium flex justify-center items-center">
-                     <span style={{ color: 'black' }}>{category.categoryName}</span>
-                     <div className="border-t flex-1 ml-4 border-black-border_700">
-                     </div></div>
-                  <div className="grid grid-cols-3 gap-3 sm:grid-cols-3 md:grid-cols-4">
+  <div className="bg-gradient-to-b from-green-100 to-green-300 min-h-screen p-4">
+    {data.map((category) => (
+      <div key={category.categoryName} className="pb-6">
+        {/* Category Header */}
+        <div className="flex justify-center items-center pb-4">
+          <span className="text-lg font-bold text-green-800">{category.categoryName}</span>
+          <div className="flex-1 ml-4 border-t border-green-500"></div>
+        </div>
 
-                     {category.categoryList.map((product) => (
-                        <Link style={{ textDecoration: 'none' }} to={`/productlist/${product.code}`}>
-                                                <div
-                           key={product.id}
-                           className="bg-white shadow-md rounded-xl overflow-hidden flex flex-col h-full"
-                        >
-                           <img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-full h-16 object-cover"
-                           />
-                           <div className="p-2 text-center flex-1 flex flex-col justify-end">
-                              <h2 className="text-sm text-gray-500 font-medium text-decoration-none">{product.name}</h2>
-                              {/* <p className="text-gray-600 text-xs">{product.price}</p> */}
-                           </div>
-                        </div>
-                        </Link>
-                     ))}
-                  </div>
-               </div>
-            ))}
-         </div>
-      </MdCategoryDisplayWrapper>
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+          {category.categoryList.map((product) => (
+            <Link
+              key={product.id}
+              to={`/productlist/${product.code}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <div
+                className="bg-white shadow-[5px_5px_10px_rgba(0,0,0,0.1),-5px_-5px_10px_rgba(255,255,255,0.9)] 
+                           rounded-2xl overflow-hidden flex flex-col h-full 
+                           transition-all duration-300 hover:scale-105 hover:shadow-[8px_8px_15px_rgba(0,0,0,0.15),-8px_-8px_15px_rgba(255,255,255,0.95)]"
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-20 object-cover rounded-t-2xl"
+                />
+                <div className="p-3 flex-1 flex flex-col justify-end bg-gradient-to-t from-green-50 to-white">
+                  <h2 className="text-sm font-semibold text-green-700">{product.name}</h2>
+                  {/* Uncomment for price */}
+                  {/* <p className="text-xs text-green-600">{product.price}</p> */}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</MdCategoryDisplayWrapper>
+
    )
 };
 

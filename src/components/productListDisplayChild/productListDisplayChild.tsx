@@ -121,115 +121,139 @@ const handleRemoveQuantityChange = async ({ quantity, product }: { quantity: num
     handleOnErrorMessageChangeChild(newErrorMessage)
   };
   return (
-    <productListDisplayChildWrapper data-testid="productListDisplayChild">
-  {/* Main Content */}
-  <main
-    className="flex-1 p-1 overflow-y-auto bg-green-100"
-    style={{ height: "auto", paddingBottom: "0" }} // Adjust height and padding
-  >
-    {/* Product Grid */}
-    <div
-      className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1"
-      style={{ width: "100%" }}
-    >
-      {currentProducts.map((product) => (
-        <div
-          key={product.id}
-          className="relative bg-white border rounded-lg hover:shadow-lg pb-4" // Reduce padding at the bottom
-        >
-          <Link
-            to={`/productview/${product.code}`}
-            style={{ textDecoration: "none" }}
-          >
-            <div>
-              <img
-                loading="lazy"
-                className="w-30 h-30 object-cover p-2 rounded-md"
-                src={product.image}
-                alt={product.name}
-                title={product.name}
-              />
-              <div className="mt-2 p-2">
-                <h3 className="text-sm font-semibold text-gray-700">
-                  {product.name}
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  <span className="ruppee-symbol-font">₹</span>
-                  {product.price}
-                </p>
-              </div>
-            </div>
-          </Link>
-          <div className="absolute bottom-2 left-2 right-2">
-            {isAuthenticated ? (
-              <CustomCtrlNumberInput
-                message={message}
-                product={product}
-                routeflag={'list'}
-                errorMessage={errorMessage}
-                onMessageChange={handleOnMessageChange}
-                onErrorMessageChange={handleOnErrorMessageChange}
-                onAddedQuantityChange={handleAddedQuantityChange}
-                onRemoveQuantityChange={handleRemoveQuantityChange}
-                style={{
-                  maxWidth: "300px",
-                  margin: "0 auto",
-                  padding: "10px",
-                  borderRadius:"10px"
-                }}
-              />
-            ) : (
-              <button
-                onClick={handleClickOpen}
-                className="w-full bg-menuHilight hover:bg-menuHilight text-gray py-2 px-4 rounded"
-              >
-                Add
-              </button>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* No Products Message */}
-    {filteredProducts.length === 0 && (
-      <p className="text-gray-500 mt-4">No products found.</p>
-    )}
-
-    {/* Pagination Controls */}
-    {filteredProducts.length > itemsPerPage && (
-      <div className="flex flex-wrap justify-center items-center mt-4 space-x-2">
-        <button
-          className="px-3 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            className={`px-3 py-2 text-sm sm:text-base ${
-              currentPage === i + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-black"
-            } rounded hover:bg-gray-300`}
-            onClick={() => goToPage(i + 1)}
-          >
-            {i + 1}
-          </button>
+<productListDisplayChildWrapper data-testid="productListDisplayChild">
+  <div className="flex min-h-screen">
+    {/* Main Content */}
+    <main className="flex-1 bg-gradient-to-b from-green-200 to-green-100 p-2 relative">
+      {/* Subtle Water Droplets Effect */}
+      <div className="absolute inset-0 bg-green-50 opacity-30 pointer-events-none overflow-hidden">
+        {/* Water droplet effect */}
+        {[...Array(10)].map((_, index) => (
+          <div
+            key={index}
+            className="absolute rounded-full bg-gradient-to-br from-white to-green-200 opacity-40 blur-md"
+            style={{
+              width: `${Math.random() * 40 + 20}px`,
+              height: `${Math.random() * 40 + 20}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+          />
         ))}
-        <button
-          className="px-3 py-2 bg-gray-200 text-black rounded hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
       </div>
-    )}
-  </main>
+
+      {/* Product Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1">
+        {currentProducts.map((product) => (
+          <div
+            key={product.id}
+            className="bg-gradient-to-b from-green-50 to-green-100 rounded-lg shadow-md overflow-hidden 
+                       transform transition-transform hover:scale-105 hover:shadow-lg"
+            style={{
+              border: "1px solid rgba(255, 255, 255, 0.3)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <Link to={`/productview/${product.code}`} style={{ textDecoration: "none" }}>
+              <div className="flex flex-col items-center p-3">
+                {/* Product Image */}
+                <img
+                  loading="lazy"
+                  className="w-full h-24 object-contain bg-gray-50 rounded-md"
+                  src={product.image}
+                  alt={product.name}
+                  title={product.name}
+                />
+                {/* Product Name and Price */}
+                <div className="mt-1 text-center">
+                  <h3
+                    className="text-xs font-medium text-gray-900 line-clamp-2"
+                    title={product.name}
+                  >
+                    {product.name}
+                  </h3>
+                  <p className="text-green-700 text-sm font-semibold mt-1">
+                    ₹{product.price}
+                  </p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Add to Cart */}
+            <div className="p-2">
+              {isAuthenticated ? (
+                <CustomCtrlNumberInput
+                  message={message}
+                  product={product}
+                  routeflag="list"
+                  errorMessage={errorMessage}
+                  onMessageChange={handleOnMessageChange}
+                  onErrorMessageChange={handleOnErrorMessageChange}
+                  onAddedQuantityChange={handleAddedQuantityChange}
+                  onRemoveQuantityChange={handleRemoveQuantityChange}
+                  style={{
+                    maxWidth: "140px",
+                    margin: "0 auto",
+                    padding: "3px",
+                    borderRadius: "6px",
+                  }}
+                />
+              ) : (
+                <button
+                  onClick={handleClickOpen}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded-lg text-xs"
+                >
+                  Add to Cart
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* No Products Message */}
+      {filteredProducts.length === 0 && (
+        <p className="text-center text-gray-600 mt-3 text-xs">
+          No products found.
+        </p>
+      )}
+
+      {/* Pagination Controls */}
+      {filteredProducts.length > itemsPerPage && (
+        <div className="flex justify-center items-center mt-3 space-x-2">
+          <button
+            className="px-3 py-1 bg-green-300 text-white rounded-full shadow hover:bg-green-400 disabled:bg-gray-200 disabled:text-gray-400 text-xs"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={`px-3 py-1 rounded-full shadow text-xs ${
+                currentPage === i + 1
+                  ? "bg-green-600 text-white"
+                  : "bg-green-300 text-gray-800"
+              } hover:bg-green-400`}
+              onClick={() => goToPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            className="px-3 py-1 bg-green-300 text-white rounded-full shadow hover:bg-green-400 disabled:bg-gray-200 disabled:text-gray-400 text-xs"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
+    </main>
+  </div>
 </productListDisplayChildWrapper>
+
   );
 };
 
