@@ -468,7 +468,7 @@ app.post("/getOrderold", (req: Request, res: Response) => {
     });
 });
 
-app.post("/getOrder", (req: Request, res: Response) => {
+app.post("/getOrderold2", (req: Request, res: Response) => {
     const { mobile } = req.body;
 
     fs.readFile(orderFilePath, "utf8", (err, fileData) => {
@@ -493,6 +493,33 @@ app.post("/getOrder", (req: Request, res: Response) => {
             console.log("latestOrder", latestOrder);
 
             return res.status(200).json({ message: "Order Item Exist", orderitems: latestOrder });
+        } else {
+            return res.status(300).json({ message: "Order Empty", orderitems: [] });
+        }
+    });
+});
+app.post("/getOrder", (req: Request, res: Response) => {
+    const { mobile } = req.body;
+
+    fs.readFile(orderFilePath, "utf8", (err, fileData) => {
+        if (err) {
+            return res.status(500).json({ message: "Error reading file" });
+        }
+
+        let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+        console.log("jsondata", jsonData);
+
+        if (jsonData.length > 0) {
+            // Retrieve all orders for the given mobile number
+            const userOrders = jsonData.filter(order => order.mobile === mobile);
+            console.log("userOrders", userOrders);
+
+            if (userOrders.length === 0) {
+                return res.status(300).json({ message: "Order Empty", orderitems: [] });
+            }
+
+            // Return all orders for the user (not just the latest one)
+            return res.status(200).json({ message: "Order Items Exist", orderitems: userOrders });
         } else {
             return res.status(300).json({ message: "Order Empty", orderitems: [] });
         }
@@ -672,6 +699,39 @@ app.post("/getProductByHcode", (req: Request, res: Response) => {
     });
 });
 
+app.post("/getProductBySearchQuery", (req: Request, res: Response) => {
+    const { code } = req.body;
+
+    fs.readFile(productFilePath, "utf8", (err, fileData) => {
+        if (err) {
+            return res.status(500).json({ message: "Error reading file" });
+        }
+
+        let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+        let filteredData: any[] = [];
+
+        // If code is null, undefined, or empty, return all products
+        const isCodeEmpty = !code || code.trim() === "";
+
+        if (jsonData.length > 0) {
+            jsonData.forEach((prod: any) => {
+                if (prod.data && Array.isArray(prod.data)) {
+                    const matchedProducts = isCodeEmpty
+                        ? prod.data // Return all products
+                        : prod.data.filter((item: any) =>
+                            item.name.toLowerCase().includes(code.toLowerCase())
+                        );
+                    filteredData.push(...matchedProducts);
+                }
+            });
+        }
+
+        return res.json({
+            message: filteredData.length > 0 ? "success" : "No Product Available",
+            productlist: filteredData
+        });
+    });
+});
 
 // Start the server
 app.listen(PORT, () => {

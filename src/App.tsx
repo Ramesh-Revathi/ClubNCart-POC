@@ -259,7 +259,7 @@ const App: React.FC = () => {
   //   setDeliveryFee(data);
   // }
   // const funcgrandTotal = (data:number) => {
-  //   debugger
+  //   
   //   setGrandTotal(data);
   // }
   // const funchandlingFee = (data:number) => {
@@ -424,7 +424,7 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
     } else {
       cartItemdata(null);
     }
-    debugger;
+    ;
     if (loggedUserData) {
       console.log('loadCart', loggedUserData);
       loadCart(loggedUserData);

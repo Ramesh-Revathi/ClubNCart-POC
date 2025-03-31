@@ -5,149 +5,175 @@ import DeliveryInstructions from '../DeliveryInstructions/DeliveryInstructions';
 import OrderSummaryComponent from '../OrderSummaryComponent/OrderSummaryComponent';
 import { getOrder } from '../../services/auth-handler.service';
 
-interface viewOrderComponentProps { }
-
-const viewOrderComponent: FC<viewOrderComponentProps> = () => {
+const ViewOrderComponent: FC = () => {
   const [userdata, setUserData] = useState<any>();
-  let orderItem, gTotal, productTotalAmount:number;
   const [isLoading, setIsLoading] = useState<boolean>(true);
-    let [cartItems, setCartItems] = useState<number>(0);
-    let [totalAmount, setTotalAmount] = useState<number>(0.00);
-    let [handlingFee, sethandlingFee] = useState<number>(0);
-    let [deliveryFee, setdeliveryFee] = useState<number>(0.00);
-    let [gtotal, setGrandTotal] = useState<number>(0.00);
-    
-    let [orderDetail, setOrderDetail] = useState<any[]>([]);
-    let [orderData, setOrderData] = useState<any>();
-    // Fetch userdata on initial render
-    useEffect(() => {
-      const userDataFromStorage = localStorage.getItem("userData");
-      if (userDataFromStorage) {
-        setUserData(JSON.parse(userDataFromStorage));
-      }
-    }, []);
-  
-    // Call getOrderFun when userdata is available
-    useEffect(() => {
-      if (userdata) {
-        getOrderFun();
-      }
-    }, [userdata]);
+  const [cartItems, setCartItems] = useState<number>(0);
+  const [totalAmount, setTotalAmount] = useState<number>(0.00);
+  const [handlingFee, setHandlingFee] = useState<number>(0);
+  const [deliveryFee, setDeliveryFee] = useState<number>(0.00);
+  const [gtotal, setGrandTotal] = useState<number>(0.00);
+  const [orderDetail, setOrderDetail] = useState<any[]>([]);
+  const [orderData, setOrderData] = useState<any>();
+  const [openOrder, setOpenOrder] = useState<number | null>(null);
+
+  useEffect(() => {
+    const userDataFromStorage = localStorage.getItem('userData');
+    if (userDataFromStorage) {
+      setUserData(JSON.parse(userDataFromStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userdata) {
+      getOrderFun();
+    }
+  }, [userdata]);
 
   const getOrderFun = async () => {
     try {
-      if (!userdata || !userdata.mobile) {
-        console.error("User data is missing or invalid. Cannot place order.");
+      if (!userdata?.mobile) {
+        console.error('User data is missing or invalid.');
         return;
       }
 
-      const payload = {
-        mobile: userdata.mobile
-      };
-
-      console.log("Placing order with payload:", payload);
-
-      const response = await getOrder(payload);
+      const response = await getOrder({ mobile: userdata.mobile });
 
       if (response?.status === 200) {
-        if(response?.data?.orderitems){
-          cartTimesCalculation(response.data.orderitems.product);
-          setOrderDetail(response.data.orderitems.product);
-          setOrderData(response.data.orderitems)
-          console.log("Order Get successfully:", response);
+        if (response?.data?.orderitems) {
+          console.log(response.data.orderitems);
+          setOrderDetail(response?.data?.orderitems);
+          setOrderData(response?.data?.orderitems);
         }
+        cartTimesCalculation(response.data.orderitems.product);
         setIsLoading(false);
-        // Add any additional acti)ons here, like updating UI or state
       } else {
-        console.error("Failed to place order. Response:", response);
+        console.error('Failed to fetch order.');
       }
     } catch (error) {
-      console.error("Error while placing order:", error);
+      console.error('Error while fetching order:', error);
     }
   };
 
-
   const cartTimesCalculation = (items: any) => {
-    console.log(items)
+    let totalQty = 0;
+    let totalPrice = 0;
     items.forEach((item: any) => {
-      console.log("item",item);
-      const price: number = parseFloat(item.product.price) * item.quantity;
-      const objquantity: number = item.quantity;
-
-      // Use functional updates to work with the latest state
-      setCartItems((prevCartItems) => prevCartItems + objquantity);
-      setTotalAmount((prevTotalAmount) => prevTotalAmount + price);
-      console.log("cartItems",cartItems);
-      console.log("setTotalAmount",totalAmount);
+      totalPrice += parseFloat(item.product.price) * item.quantity;
+      totalQty += item.quantity;
     });
+
+    setCartItems(totalQty);
+    setTotalAmount(totalPrice);
   };
 
-    useEffect(() => {
-      console.log(cartItems);
-      //setCartItems(data[0].item);
-      const deliverFeePrice = cartItems * 2;
-      const handlingFeePrice = 2;
-      setdeliveryFee(deliverFeePrice);
-      sethandlingFee(handlingFeePrice);
-      const gtotal = (totalAmount + deliverFeePrice + handlingFeePrice);
-      setGrandTotal(gtotal);
-      console.log("orderData",orderData);
-    }, [cartItems, totalAmount, orderDetail, orderData]);
+  useEffect(() => {
+    const deliverFeePrice = cartItems * 2;
+    const handlingFeePrice = 2;
+    setDeliveryFee(deliverFeePrice);
+    setHandlingFee(handlingFeePrice);
+    setGrandTotal(totalAmount + deliverFeePrice + handlingFeePrice);
+  }, [cartItems, totalAmount]);
+
+  // Handle the toggle for expanding/collapsing orders
+  const toggleOrder = (index: number) => {
+    setOpenOrder(openOrder === index ? null : index);
+  };
 
   return (
     <viewOrderComponentWrapper data-testid="viewOrderComponent">
-      return (
-      <div className="p-0">
-        <header className="fixed top-0 left-0 w-full bg-white z-10" style={{ height: "10%" }}>
-          <div className="p-3">
-            <div className="flex items-center w-full"><a style={{ textDecoration: "none" }} href="/" className="w-7"><img src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg" alt="Bananas" /></a>
-              <div className="flex justify-between items-center flex-1 w-full"><div className="text-lg pl-2 font-medium">Your Order - # {orderData?.orderID} </div>
-                <a style={{ textDecoration: "none" }} href="/search">
-                  <img width="22" height="22" src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg" alt="Search Product" className="w-5 h-5 m-3" /></a>
-              </div></div>
-          </div>
-        </header>
-        <div className="container mb-1 pt-[70px]">
-
-          <div className="w-full p-2 rounded-t-lg lg:hidden border border-gray-200 bg-gradient-to-b from-green-200 to-white flex justify-flex-star items-center h-[60px]">
-            <span className="font-medium text-sm text-gray-800">
-              Delivering in 11 minutes
-            </span>
-          </div>
-          <span className="font-medium text-sm text-gray-800">
-              Ordered Item's
-            </span>
-          <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-1  pt-[5px]" style={{zIndex:"555"}}>
-          {orderDetail.map((pitem:any) => (
-            <div className="container mb-1">
-              <div className="lg:w-[850px] m-auto">
-              <div className="w-16 lg:w-12 h-16 lg:h-12 border border-gray-200 rounded-md flex justify-center items-center p-0.5 pt-[5px]">
-                        <img
-                          src={pitem.product.image}
-                          className="max-w-full"
-                          alt={pitem.product.name}
-                        />
-                      </div>
-                </div>
-                </div>
-          ))}
-                </div>
-
-          <div className="container mb-1">
-            {/* <DeliveryModeComponentCart />
-            <DeliveryInstructions /> */}
-            <OrderSummaryComponent
-              productTotalAmount={totalAmount}
-              item={cartItems}
-              deliveryFee={deliveryFee}
-              handlingFee={handlingFee}
-              grandTotal={gtotal}
+      <div className="p-0 bg-green-100">
+        {/* 🌟 Sticky Order Header */}
+        <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 to-green-600 shadow-xl z-20 flex items-center px-4 py-3 rounded-b-2xl">
+          <a href="/" className="w-8">
+            <img
+              src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
+              alt="Back"
             />
+          </a>
+          <div className="flex-grow text-lg font-semibold text-white text-center tracking-wide">
+            Your Orders
+          </div>
+          <a href="/search">
+            <img
+              width="24"
+              height="24"
+              src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg"
+              alt="Search"
+            />
+          </a>
+        </header>
+
+        {/* 🌟 Main Content */}
+        <div className="container pt-[80px]">
+          <div className="w-full p-3 bg-gradient-to-b from-green-400 to-green-200 shadow-lg rounded-xl text-center animate-fade-in">
+            <span className="font-medium text-lg text-gray-900">🚀 Delivering in 11 minutes</span>
+          </div>
+
+          {/* 🌟 Orders List */}
+          <h2 className="font-semibold text-xl text-green-800 mt-6 tracking-wide">Your Orders</h2>
+          <div className="space-y-4 pt-4">
+            {orderDetail.map((order: any, orderIndex: number) => (
+              <div
+                key={orderIndex}
+                className="bg-white shadow-xl rounded-xl p-4 transition-all duration-300 hover:shadow-2xl hover:bg-green-50"
+              >
+                <div
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleOrder(orderIndex)}
+                >
+                  <span className="text-md font-medium text-gray-800">{`Order #${order.orderID}`}</span>
+                  <span className="text-green-600">
+                    {openOrder === orderIndex ? 'Collapse' : 'Expand'}
+                  </span>
+                </div>
+
+                {openOrder === orderIndex && (
+                  <div className="pt-4">
+                    {/* 🌟 Ordered Items */}
+                    <h3 className="font-semibold text-lg text-green-800 mt-4">Ordered Items</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                      {order.product.map((pitem: any, index: number) => (
+                        <div
+                          key={index}
+                          className="bg-white shadow-lg rounded-xl p-4 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-green-50"
+                        >
+                          <div className="w-20 h-20 border border-green-300 rounded-full flex justify-center items-center bg-gradient-to-r from-green-100 to-white shadow-md">
+                            <img
+                              src={pitem.product.image}
+                              className="max-w-full object-contain"
+                              alt={pitem.product.name}
+                            />
+                          </div>
+                          <span className="text-md font-medium text-gray-800 mt-3">
+                            {pitem.product.name}
+                          </span>
+                          <span className="text-green-700 text-lg font-bold">
+                            ₹{pitem.product.price}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* 🌟 Order Summary */}
+                    <div className="mt-6 bg-white shadow-md rounded-xl p-4 border border-green-300">
+                      <h4 className="font-semibold text-lg text-green-800">Order Summary</h4>
+                      <div className="text-green-700 font-medium">
+                        <div>Total Amount: ₹{order.totalAmount}</div>
+                        <div>Delivery Fee: ₹{order.deliveryFee}</div>
+                        <div>Handling Fee: ₹{order.handlingFee}</div>
+                        <div className="mt-2 text-lg font-bold">Grand Total: ₹{order.grandTotal}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </viewOrderComponentWrapper>
-  )
+  );
 };
 
-export default viewOrderComponent;
+export default ViewOrderComponent;

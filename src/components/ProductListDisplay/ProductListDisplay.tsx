@@ -53,8 +53,8 @@ const ProductListDisplay: FC<ProductListDisplayProps> = ({ cartItemQuantity }) =
   const [quantity, setQuantity] = useState<{ quantity: number; product: any }[]>([]); // Initial value
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userdata, setUserData] = useState<any>();
-  let totalPage:number = 0;
   const [userFetched, setUserFeched] = useState(false);
+  const [totalPage, setTotalPage] = useState(0);
   const [message, setMessage] = useState<"error" | "warning" | "success">(
     "error"
   );
@@ -89,23 +89,26 @@ const ProductListDisplay: FC<ProductListDisplayProps> = ({ cartItemQuantity }) =
   const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPage) {
       setCurrentPage(page);
+      const pathParts = location.pathname.split("/");
+      const lastPart = pathParts[pathParts.length - 1];
+      getProductByHcodeFun({ code: lastPart });
     }
   };
-  const filProdFun = (selectedCategory:any, productdata:any[]) => {
-    debugger
+  
+  const filProdFun = (selectedCategory: any, productdata: any[]) => {
     const filterProd =
-    selectedCategory === "All"
-      ? productdata
-      : productdata.filter((product:any) => product.category === selectedCategory);
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const currentProd= filterProd.slice(
-        startIndex,
-        startIndex + itemsPerPage
-      );
-     setCProducts(currentProd)
-      totalPage = Math.ceil(filterProd.length / itemsPerPage);
-      setFProducts(filterProd);
-  }
+      selectedCategory === "All"
+        ? productdata
+        : productdata.filter((product: any) => product.category === selectedCategory);
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentProd = filterProd.slice(startIndex, startIndex + itemsPerPage);
+    
+    setCProducts(currentProd);
+    setTotalPage(Math.ceil(filterProd.length / itemsPerPage)); // Update totalPage state
+    setFProducts(filterProd);
+  };
+  
   useEffect(() => {
     // Perform tasks like fetching data
     setisLoggedIn(!!sessionStorage.getItem("loggedUserMobNo"));

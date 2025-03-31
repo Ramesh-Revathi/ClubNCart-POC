@@ -138,7 +138,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
       mobile: userdata?.mobile,
       item: input,
     });
-    debugger;
+    ;
     if (cartResponse.statusText === 'OK') {
       const cartGetResponse = await getCart({ mobile: userdata?.mobile });
       if (
@@ -175,7 +175,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
       mobile: userdata?.mobile,
       item: input,
     });
-    debugger;
+    ;
     console.log('cartResponse', cartResponse);
     if (cartResponse.statusText === 'OK') {
       const cartGetResponse = await getCart({ mobile: userdata?.mobile });

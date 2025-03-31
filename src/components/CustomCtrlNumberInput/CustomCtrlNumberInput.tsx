@@ -59,7 +59,7 @@ const CustomCtrlNumberInput: FC<CustomCtrlNumberInputProps> = ({
     }
 
     setQuantity(newQuantity);
-    debugger
+    
     if(routeflag=='cart'){
       onRemoveQuantityChange({ quantity: newQuantity,product: products });
     }else{

@@ -72,7 +72,7 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
 
   useEffect(() => {
     const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]');
-    debugger;
+    ;
     console.log('quantity - yourd', quantity);
     if (quantity?.length > 0) {
       clearCart();
@@ -89,7 +89,7 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
     try {
       const response = await getAddressForCart({ mobile: mobile });
       const responseText = await response.statusText;
-      debugger;
+      ;
       if (response?.status === 200) {
         if (!response?.data?.addresses) {
           throw new Error('No addresses in response');
@@ -110,7 +110,7 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
   };
   useEffect(() => {
     const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]');
-    debugger;
+    ;
     if (routeFlag == 'cart') {
       viewCartBottomChange([{ item: cartItems, amount: totalAmount }]);
     }
