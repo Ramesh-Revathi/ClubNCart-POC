@@ -38,7 +38,7 @@ const AppFooterSection: FC<AppFooterSectionProps> = ({ routeFlag }) => {
             className="w-full h-48 bg-cover bg-center flex flex-col justify-center items-center gap-4 rounded-lg mb-6 shadow-lg relative z-10"
             style={{
               backgroundImage:
-                'url("/_next/static/media/downloadBanner.a60d7a9c.png")',
+                'url("https://www.kpnfresh.com/_next/static/media/downloadBanner.a60d7a9c.png")',
               borderRadius: "15px",
               backgroundBlendMode: "overlay",
               backgroundColor: "rgba(0, 0, 0, 0.4)", // Overlay for better visibility

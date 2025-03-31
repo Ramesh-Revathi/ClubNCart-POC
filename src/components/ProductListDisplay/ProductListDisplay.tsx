@@ -190,63 +190,44 @@ const ProductListDisplay: FC<ProductListDisplayProps> = ({ cartItemQuantity }) =
       <div className="flex bg-white-700" style={{ height: "50%" }}>
       <header
   className="fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 via-green-400 to-green-300 shadow-lg z-10 backdrop-blur-lg"
-  style={{ height: "12%" }}
+  style={{ height: "8%" }} // Reduced height
 >
-  <div className="p-4 relative">
-    {/* Water Droplets Effect */}
-    <div className="absolute inset-0 pointer-events-none">
-      {[...Array(10)].map((_, index) => (
-        <div
-          key={index}
-          className="absolute rounded-full bg-gradient-to-br from-white to-green-200 opacity-50 blur-lg animate-pulse"
-          style={{
-            width: `${Math.random() * 50 + 20}px`,
-            height: `${Math.random() * 50 + 20}px`,
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 2}s`,
-          }}
-        />
-      ))}
+  <div className="p-2 relative flex items-center justify-between">
+    {/* Back Button */}
+    <a
+      href="/"
+      style={{ textDecoration: "none" }}
+      className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
+    >
+      <img
+        src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
+        alt="Back"
+        className="w-4 h-4" // Reduced size
+      />
+    </a>
+
+    {/* Category Title */}
+    <div className="text-sm font-semibold text-white text-center flex-grow">
+      {selectedCategory}
     </div>
 
-    {/* Header Content */}
-    <div className="relative flex items-center justify-between">
-      {/* Back Button */}
-      <a
-        href="/"
-        style={{ textDecoration: "none" }}
-        className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
-      >
-        <img
-          src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
-          alt="Back"
-          className="w-6 h-6"
-        />
-      </a>
-
-      {/* Category Title */}
-      <div className="text-xl font-semibold text-white pl-4">
-        {selectedCategory}
-      </div>
-
-      {/* Search Button */}
-      <a
-        href="/search"
-        style={{ textDecoration: "none" }}
-        className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
-      >
-        <img
-          src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg"
-          alt="Search"
-          className="w-6 h-6"
-        />
-      </a>
-    </div>
+    {/* Search Button */}
+    <a
+      href="/search"
+      style={{ textDecoration: "none" }}
+      className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
+    >
+      <img
+        src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg"
+        alt="Search"
+        className="w-4 h-4" // Reduced size
+      />
+    </a>
   </div>
 </header>
+
         <main>
-          <div className="flex pt-[70px] bg-green-100" style={{
+          <div className="flex pt-[60px] bg-green-100" style={{
             paddingBottom: `${paddingBottom}px`,
           }}>
             {categories && categories.length > 0 && (
