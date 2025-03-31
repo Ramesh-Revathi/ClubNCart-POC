@@ -98,7 +98,7 @@ const AddressBook: FC<AddressBookProps> = () => {
     addressLine2: string;
     addressType: string;
   }) => {
-    debugger
+    
     const storedUser = sessionStorage.getItem('userData');
     if (!storedUser) {
       console.error('No user data found in session storage');
@@ -122,7 +122,7 @@ const AddressBook: FC<AddressBookProps> = () => {
       });
   };
   const handleSelectedAddress = (data:any) => {
-    debugger
+    
     setSelectedAdress(data);
     console.log("data selce", data);
   };

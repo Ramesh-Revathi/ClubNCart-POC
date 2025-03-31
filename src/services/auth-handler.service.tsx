@@ -83,3 +83,6 @@ export function getProductByHcode(code: any): AxiosPromise<any> {
   return axiosClient.post('http://localhost:5000/getProductByHcode', code);
 }
 
+export function getProductBySearchQuery(code: any): AxiosPromise<any> {
+  return axiosClient.post('http://localhost:5000/getProductBySearchQuery', code);
+}

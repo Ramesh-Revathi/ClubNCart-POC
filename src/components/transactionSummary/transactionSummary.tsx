@@ -13,7 +13,7 @@ const transactionSummary: FC<transactionSummaryProps> = ({ transactionId=0, amou
   const navigate = useNavigate();
 const [userdata, setUserData] = useState<any>();
   const navigateToOrder = () => {
-    debugger
+    
     navigate("/order", { replace: true });
   }
     useEffect(() => {
@@ -62,39 +62,40 @@ const [userdata, setUserData] = useState<any>();
     
   return (
  <transactionSummaryWrapper data-testid="transactionSummary">
-    <div className="flex flex-col items-center justify-center bg-white-100">
-      <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
-        {/* Loader Animation */}
-        <div className="flex items-center justify-center mb-4">
-          <div className="animate-spin rounded-full h-44 w-44 border-t-4 border-green-500 border-solid"></div>
-        </div>
-        {/* Success Message */}
-        <h1 className="text-2xl font-semibold text-green-600">Yay!</h1>
-        <h1 className="text-2xl font-semibold text-green-600">Order Placed Successful!</h1>
-        <p className="text-gray-600 mt-2">Your transaction was completed successfully.</p>
-        
-        {/* Transaction Details */}
-        <div className="mt-6 border-t pt-4 text-left">
-          <p className="text-sm text-gray-500">
-            <span className="font-medium text-gray-700">Transaction ID:</span> {transactionId}
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            <span className="font-medium text-gray-700">Amount:</span> <span className="ruppee-symbol-font">₹</span> {amount}
-          </p>
-          <p className="text-sm text-gray-500 mt-2">
-            <span className="font-medium text-gray-700">Date:</span> {date}
-          </p>
-        </div>
-
-        {/* CTA */}
-        <button
-          className="mt-6 w-full bg-menuHilight text-gray-700 font-medium py-2 rounded-lg hover:bg-menuHilight transition duration-300"
-          onClick={navigateToOrder}
-        >
-          Track Your Order
-        </button>
-      </div>
+<div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-green-300 via-green-400 to-green-600">
+  <div className="bg-white rounded-3xl p-8 max-w-lg w-full text-center shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    {/* Loader Animation */}
+    <div className="flex items-center justify-center mb-6">
+      <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-green-500 border-solid"></div>
     </div>
+    
+    {/* Success Message */}
+    <h1 className="text-3xl font-semibold text-green-700 mt-2">Yay!</h1>
+    <h1 className="text-3xl font-semibold text-green-700">Order Placed Successfully!</h1>
+    <p className="text-gray-700 mt-3 text-lg">Your transaction was completed successfully.</p>
+
+    {/* Transaction Details */}
+    <div className="mt-8 border-t pt-6 text-left">
+      <p className="text-sm text-gray-600">
+        <span className="font-medium text-gray-800">Transaction ID:</span> {transactionId}
+      </p>
+      <p className="text-sm text-gray-600 mt-2">
+        <span className="font-medium text-gray-800">Amount:</span> <span className="text-green-600">₹</span> {amount}
+      </p>
+      <p className="text-sm text-gray-600 mt-2">
+        <span className="font-medium text-gray-800">Date:</span> {date}
+      </p>
+    </div>
+
+    {/* CTA */}
+    <button
+      className="mt-8 w-full bg-green-600 text-white font-medium py-3 rounded-xl hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+      onClick={navigateToOrder}
+    >
+      Track Your Order
+    </button>
+  </div>
+</div>
  </transactionSummaryWrapper>
 )};
 
