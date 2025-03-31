@@ -176,7 +176,7 @@ module.exports = {
       customYellow: '#fed602',
       customBlue:'#390098',
       customPink:'#ff72e9',
-      menuHilight:"#ffe928 " // Replace this with your desired color
+      menuHilight:"#F2C44C" // Replace this with your desired color
     }),
     columns: {
       auto: 'auto',

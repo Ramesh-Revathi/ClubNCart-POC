@@ -244,7 +244,7 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
           <div
             className="flex justify-between items-center w-full h-full"
             style={{
-              background: "rgba(0, 0, 0, 0.85)", // Darker semi-transparent background
+              background: "rgba(255, 183, 0, 0.95)", // Darker semi-transparent background
               backdropFilter: "blur(5px)", // Softer blur for readability
               borderRadius: "5px",
             }}

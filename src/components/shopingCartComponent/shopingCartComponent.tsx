@@ -70,6 +70,26 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
   const [grandTotal, setGrandTotal] = useState<number | 0.0>(0.0);
   const [userdata, setUserData] = useState<any>();
   let objCartItems: any[] = [];
+  const [currentTime, setCurrentTime] = useState<string>("");
+  const [deliveryMinutes, setDeliveryMinutes] = useState<number>(11);
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }));
+
+      setDeliveryMinutes((prev) => Math.max(0, prev - 1));
+    };
+
+    // Initial update
+    updateClock();
+
+    // Update every second
+    const interval = setInterval(updateClock, 20000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
   useEffect(() => {
     try {
       setUserData(JSON.parse(sessionStorage.getItem('userData') || '[]'));
@@ -190,7 +210,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
     // });
   };
 
-  const viewCartBottomChange = (data: any[] | []) => {};
+  const viewCartBottomChange = (data: any[] | []) => { };
   const handleViewCartBottomChange = (data: any[]) => {
     if (data.length > 0) {
       setproductTotalAmount(data[0].amount);
@@ -207,121 +227,216 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
   };
 
   return (
-    <div className="p-0">
+    <div className="p-0 bg-green-100">
       <header
-        className="fixed top-0 left-0 w-full bg-white z-10"
-        style={{ height: '10%' }}
+        className="fixed top-0 left-0 w-full z-10 shadow-lg bg-gradient-to-r from-green-500 via-green-400 to-green-300 rounded-b-lg backdrop-blur-lg"
+        style={{
+          height: "8%", // Compact header height
+        }}
       >
-        <div className="p-3">
-          <div className="flex items-center w-full">
-            <a style={{ textDecoration: 'none' }} href="/" className="w-7">
-              <img
-                src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
-                alt="Bananas"
-              />
-            </a>
-            <div className="flex justify-between items-center flex-1 w-full">
-              <div className="text-lg pl-2 font-medium">Shopping Cart</div>
-              <a style={{ textDecoration: 'none' }} href="/search">
-                <img
-                  width="22"
-                  height="22"
-                  src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg"
-                  alt="Search Product"
-                  className="w-5 h-5 m-3"
-                />
-              </a>
-            </div>
+        <div className="p-2 relative flex items-center justify-between">
+          {/* Back Button */}
+          <a
+            href="/"
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md transform transition-transform hover:scale-110"
+            style={{
+              background: "linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5))",
+              boxShadow: "0 3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.5)",
+            }}
+          >
+            <img
+              src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
+              alt="Back"
+              className="w-4 h-4"
+            />
+          </a>
+
+          {/* Title */}
+          <div
+            className="text-sm font-semibold text-white text-center drop-shadow-lg flex-grow"
+            style={{
+              textShadow: "0 0 4px rgba(255, 255, 255, 0.8), 0 0 6px rgba(255, 255, 255, 0.5)",
+            }}
+          >
+            Shopping Cart
           </div>
+
+          {/* Search Button */}
+          <a
+            href="/search"
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-md transform transition-transform hover:scale-110"
+            style={{
+              background: "linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5))",
+              boxShadow: "0 3px 6px rgba(0, 0, 0, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.5)",
+            }}
+          >
+            <img
+              src="https://www.kpnfresh.com/_next/static/media/search.bc83239a.svg"
+              alt="Search"
+              className="w-4 h-4"
+            />
+          </a>
         </div>
       </header>
-      {productQuantities.length !== 0 && (
-        <div className="container mb-1 pt-[70px]">
-          <div className="w-full p-2 rounded-t-lg lg:hidden border border-gray-200 bg-gradient-to-b from-green-200 to-white flex justify-flex-star items-center h-[100px]">
-            <span className="font-medium text-sm text-gray-800">
-              Delivering in 11 minutes
-            </span>
-          </div>
-        </div>
-      )}
+
+
+
+
       {productQuantities.length === 0 ? (
-        <div className="flex justify-center items-center ">
-          <p className="text-gray-500 pt-[72px]">Your cart is empty.</p>
-        </div>
-      ) : (
+        <div className="flex justify-center items-center h-screen bg-gradient-to-b from-green-900 via-green-800 to-green-700">
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1  pt-[2px]"
-          style={{ zIndex: '555' }}
+          className="relative bg-gradient-to-b from-green-600 via-green-500 to-green-400 rounded-lg shadow-2xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:scale-[1.03] flex flex-col items-center justify-center w-[90%] max-w-sm h-[50%] p-4"
+          style={{ perspective: "800px" }}
         >
-          {productQuantities.map((item) => (
-            <div key={item.product.id} className="container mb-1">
-              <div className="lg:w-[850px] m-auto">
-                <li className="flex gap-1 justify-between w-full py-4 px-[10px] border-b last:border-b-0 border-gray-200">
-                  <div className="flex-1">
-                    <a
-                      style={{ textDecoration: 'none' }}
-                      target="_self"
-                      rel="noreferrer"
-                      className="flex gap-1"
-                      href={`/product/${item.product.id}`}
-                    >
-                      <div className="w-16 lg:w-12 h-16 lg:h-12 border border-gray-200 rounded-md flex justify-center items-center p-0.5">
-                        <img
-                          src={item.product.image}
-                          className="max-w-full"
-                          alt={item.product.name}
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <div className="text-black text-gray-300 text-sm font-medium">
-                          {item.product.name}
-                        </div>
-                        <div className="text-gray text-xs text-gray-700 font-light flex gap-3 items-center py-1.5">
-                          <span className="leading-none">
-                            Weight: {item.product.minWeight}g -{' '}
-                            {item.product.maxWeight}g
-                          </span>
-                        </div>
-                        <span className="text-sm text-gray-700">
-                          <span className="font-medium">
-                            ₹ {item.product.price}
-                          </span>
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-                  <CustomCtrlNumberInput
-                    message={message}
-                    product={item}
-                    routeflag={'cart'}
-                    errorMessage={errorMessage}
-                    onMessageChange={handleOnMessageChange}
-                    onErrorMessageChange={handleOnErrorMessageChange}
-                    onAddedQuantityChange={handleAddedQuantityChange}
-                    style={{
-                      maxWidth: '75px',
-                      margin: '0 auto',
-                      padding: '10px',
-                      borderRadius: '10px',
-                    }}
-                    onRemoveQuantityChange={handleRemoveQuantityChange}
-                  />
-                </li>
-              </div>
-            </div>
-          ))}
-          <div className="container mb-1">
-            <DeliveryModeComponentCart />
-            <DeliveryInstructions />
-            <OrderSummaryComponent
-              productTotalAmount={globalproductTotalAmount}
-              item={globalitem}
-              deliveryFee={globaldeliveryFee}
-              handlingFee={globalhandlingFee}
-              grandTotal={globalgrandTotal}
+          {/* Background Glow */}
+          <div
+            className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-500 via-green-400 to-green-300 transform rotate-x-[10deg] opacity-80 transition-transform duration-500 hover:rotate-x-0 shadow-inner"
+          ></div>
+      
+          {/* Floating Shadow */}
+          <div
+            className="absolute -bottom-2 left-2 right-2 h-4 rounded-lg bg-green-700/40 blur-lg transform -skew-x-3"
+          ></div>
+      
+          {/* Empty Cart Icon */}
+          <div className="relative z-10 mb-4">
+            <img
+              src="https://png.pngtree.com/png-clipart/20240730/original/pngtree-shopping-cart-convenient-icon-png-image_15666221.png" // Replace with your image URL
+              alt="Empty Cart"
+              className="h-20 w-20 object-contain"
             />
           </div>
+      
+          {/* Message */}
+          <p className="relative z-10 text-white text-lg font-bold text-center leading-tight drop-shadow-md">
+            Your cart is empty
+          </p>
+          <p className="relative z-10 text-white text-sm mt-2 opacity-80 text-center">
+            Start adding your favorite items now!
+          </p>
+      
+          {/* Call-to-Action Button */}
+          <a
+            href="/"
+            className="relative z-10 mt-4 px-6 py-2 text-sm font-semibold text-white bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full shadow-lg hover:shadow-xl transition-transform duration-300 hover:scale-105 max-w-full"
+          >
+            Shop Now
+          </a>
         </div>
+      </div>      
+      ) : (
+        <div
+  className="container mx-auto p-6 bg-green-100 rounded-2xl shadow-xl pt-[60px]"
+  style={{ zIndex: 555 }}
+>
+  {/* Header or Card Title */}
+  <h2 className="hidden text-lg font-bold text-green-800 mb-4">Your Cart</h2>
+  {productQuantities.length !== 0 && (
+        <div className="container mb-2">
+          <div
+            className="relative w-full p-3 rounded-md bg-gradient-to-b from-green-600 to-green-400 shadow-lg hover:shadow-xl transition-transform duration-200 hover:scale-[1.02] flex items-center h-[60px]"
+          >
+            {/* Background Animation */}
+            <div
+              className="absolute inset-0 rounded-md bg-gradient-to-b from-green-500 to-green-300 opacity-90 transform hover:opacity-100 transition-opacity duration-300"
+            ></div>
+
+            {/* Content */}
+            <div className="relative z-10 flex flex-col justify-center w-full">
+              <span className="text-white text-sm font-bold leading-tight">
+                Delivering in{" "}
+                <span className="text-yellow-200 font-extrabold">{deliveryMinutes}</span> minutes
+              </span>
+              <span
+                className="hidden text-xs text-gray-800 bg-white px-2 py-0.5 rounded-md shadow-sm mt-1"
+                style={{
+                  background: "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85))",
+                }}
+              >
+                Time: <span className="text-green-700">{currentTime}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+
+      )}
+
+  {/* Product List */}
+  <ul className="divide-y divide-gray-200 pl-0">
+    {productQuantities.map((item) => (
+      <li
+        key={item.product.id}
+        className="flex items-center gap-4 py-4 px-4 hover:bg-green-50 transition-colors duration-200"
+      >
+        {/* Product Image */}
+        <a
+          href={`/product/${item.product.id}`}
+          className="flex-none w-16 h-16 border border-green-200 rounded-lg flex justify-center items-center overflow-hidden shadow-sm"
+          style={{ textDecoration: "none" }}
+        >
+          <img
+            src={item.product.image}
+            alt={item.product.name}
+            className="max-w-full"
+          />
+        </a>
+
+        {/* Product Details */}
+        <div className="flex-1">
+          <a
+            href={`/product/${item.product.id}`}
+            className="block text-sm font-bold text-green-700 hover:underline"
+          >
+            {item.product.name}
+          </a>
+          <div className="text-xs text-gray-500 mt-1">
+            Weight: {item.product.minWeight}g - {item.product.maxWeight}g
+          </div>
+          <div className="text-sm text-green-800 font-semibold mt-1">
+            ₹ {item.product.price}
+          </div>
+        </div>
+
+        {/* Quantity Input */}
+        <div className="flex-none">
+          <CustomCtrlNumberInput
+            message={message}
+            product={item}
+            routeflag={"cart"}
+            errorMessage={errorMessage}
+            onMessageChange={handleOnMessageChange}
+            onErrorMessageChange={handleOnErrorMessageChange}
+            onAddedQuantityChange={handleAddedQuantityChange}
+            onRemoveQuantityChange={handleRemoveQuantityChange}
+            style={{
+              maxWidth: "75px",
+              padding: "8px",
+              borderRadius: "8px",
+              border: "1px solid #d1d5db",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            }}
+          />
+        </div>
+      </li>
+    ))}
+  </ul>
+
+  {/* Summary and Actions */}
+  <div className="mt-6">
+    <DeliveryModeComponentCart />
+    <DeliveryInstructions />
+    <OrderSummaryComponent
+      productTotalAmount={globalproductTotalAmount}
+      item={globalitem}
+      deliveryFee={globaldeliveryFee}
+      handlingFee={globalhandlingFee}
+      grandTotal={globalgrandTotal}
+    />
+  </div>
+</div>
+
       )}
       {/* <ViewCartAtBottom
         quantity={quantity}

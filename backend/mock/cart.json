@@ -2,7 +2,38 @@
     {
         "id": 1,
         "mobile": "+91-7811872087",
-        "product": []
+        "product": [
+            {
+                "quantity": 1,
+                "product": {
+                    "id": 1,
+                    "code": "AP001",
+                    "name": "Pink Lady Apple",
+                    "price": "99",
+                    "minWeight": "300",
+                    "maxWeight": "360",
+                    "unit": "2",
+                    "maximumQty": "5",
+                    "category": "Apples & Pears",
+                    "image": "https://services.kpnfarmfresh.com/media/v1/products/images/87b46eca-52ef-46db-8376-12337e82d74d/apple-green-.webp?c_type=C1"
+                }
+            },
+            {
+                "quantity": 1,
+                "product": {
+                    "id": 1,
+                    "code": "CI001",
+                    "name": "Orange Australia",
+                    "price": "29",
+                    "minWeight": "340",
+                    "maxWeight": "460",
+                    "unit": "2",
+                    "maximumQty": "5",
+                    "category": "Citrus",
+                    "image": "https://services.kpnfarmfresh.com/media/v1/products/images/0e5dfae7-51ab-404f-a157-f13550575c0f/orange-australia.webp?c_type=C1"
+                }
+            }
+        ]
     },
     {
         "id": 2,
