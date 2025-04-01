@@ -48,6 +48,10 @@ const ProductListDisplayChild: FC<ProductListDisplayChildProps> = ({
   addedQuantityChangeChild,
   removeQuantityChangeChild
 }) => {
+  useEffect(() => {
+    setUserData(JSON.parse(sessionStorage.getItem("userData")|| "[]"
+  ).user);
+  }, []);
   const [message, setMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [addedQuantities, setAddedQuantities] = useState<{ quantity: number; product: any }[]>([]);
@@ -57,8 +61,7 @@ const ProductListDisplayChild: FC<ProductListDisplayChildProps> = ({
   const [forceRender, setForceRender] = useState(0);
  // Callback for quantity changes
  useEffect(() => {
-  setUserData(JSON.parse(sessionStorage.getItem("userData")|| "[]"
-));
+  setUserData(JSON.parse(sessionStorage.getItem("userData")|| "[]").user);
 }, []);
 
 useEffect(() => {

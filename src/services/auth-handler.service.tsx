@@ -86,3 +86,15 @@ export function getProductByHcode(code: any): AxiosPromise<any> {
 export function getProductBySearchQuery(code: any): AxiosPromise<any> {
   return axiosClient.post('http://localhost:5000/getProductBySearchQuery', code);
 }
+
+export function updateFee(mobile: any,handlingfee:any, deliveryfee:any, productTotalAmount:any, payableAmount:any): AxiosPromise<any> {
+  return axiosClient.post('http://localhost:5000/updatefee', { mobile, handlingfee, deliveryfee, productTotalAmount, payableAmount });
+}
+
+export function updateAddress(mobile: any, address: any): AxiosPromise<any> {
+  return axiosClient.post('http://localhost:5000/updateAddress', { mobile, address });
+}
+
+export function updatePaymentMode(mobile: any, mode: any): AxiosPromise<any> {
+  return axiosClient.post('http://localhost:5000/updatePaymentMode', { mobile, mode });
+}

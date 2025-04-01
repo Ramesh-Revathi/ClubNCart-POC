@@ -135,7 +135,7 @@ const App: React.FC = () => {
     setUserLoginNo(number); // This updates the state asynchronously
     const objUserData = await userlogin({ mobile: '+91-' + number });
     console.log('objUserData', objUserData);
-    sessionStorage.setItem('userData', JSON.stringify(objUserData?.data?.user));
+    sessionStorage.setItem('userData', JSON.stringify(objUserData?.data));
     localStorage.setItem('userData', JSON.stringify(objUserData?.data?.user));
     getLoggedInUser()
       .then((response) => {
@@ -219,7 +219,7 @@ const App: React.FC = () => {
   useEffect(() => {
     // Perform tasks like fetching data
     setisLoggedIn(!!sessionStorage.getItem('loggedUserMobNo'));
-    const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]');
+    const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]').user;
     getLoggedInUser()
       .then((response) => {
         const { created_using, email, phone } = response?.data;
@@ -355,6 +355,9 @@ const App: React.FC = () => {
       }}
       viewCartBottomChange={handleViewCartBottomChange}
       payableAmount={grandTotal}
+      handlingfee={handlingFee}
+      deliveryfee={deliveryFee}
+      productTotalAmount = {productTotalAmount}
     />
 )}
 
@@ -395,7 +398,7 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
     console.log('Route changed:', location.pathname);
     const loggedUserData = JSON.parse(
       sessionStorage.getItem('userData') || '[]'
-    );
+    ).user;
     if (location.pathname === '/cart') {
       routeFlag('cart');
     } else if (

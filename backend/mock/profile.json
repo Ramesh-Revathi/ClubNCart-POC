@@ -1,41 +1,16 @@
 [
     {
-        "id": 2,
-        "name": "Revathi R",
-        "mailid": "",
-        "mobile": "+91-9080369251",
-        "address": [
-            {
-                "id": 1,
-                "address": {
-                    "street": "34-09",
-                    "area": "5th satreet, CMWSSB Division 35, Tondiarpet, Chennai, Tamil Nadu, 600001, India",
-                    "addressType": "Home"
-                }
-            },
-            {
-                "id": 2,
-                "address": {
-                    "name": "Ramesh C",
-                    "street": "23/78",
-                    "area": "NH544H, Mecheri, Mettur, Salem, Tamil Nadu, 636453, India",
-                    "addressType": "Home"
-                }
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "name": "Ramesh C",
+        "id": 1,
+        "name": "Ramesh  C",
         "mailid": "",
         "mobile": "+91-7811872087",
         "address": [
             {
                 "id": 1,
                 "address": {
-                    "name": "Ramesh C",
-                    "street": " 1/154",
-                    "area": "Mecheri, Mettur, Salem, Tamil Nadu, 636453, India",
+                    "name": "Ramesh  C",
+                    "street": "1/91",
+                    "area": "NH544H, Kunjandiyur, Mettur, Salem, Tamil Nadu, 636403, India",
                     "addressType": "Home"
                 }
             }

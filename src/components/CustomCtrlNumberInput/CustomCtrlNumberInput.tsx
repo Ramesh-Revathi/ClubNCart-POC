@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { CustomCtrlNumberInputWrapper } from "./CustomCtrlNumberInput.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -29,7 +29,11 @@ const CustomCtrlNumberInput: FC<CustomCtrlNumberInputProps> = ({
   const [quantity, setQuantity] = useState<number>(0);
   const [products, setproducts] = useState();
 
-  const handleIncrement = () => {
+  useEffect(() => {
+    setQuantity(0); // Reset to 0
+  }, [product.code]); // Trigger when product changes
+
+  const handleIncrement = () => { 
     const newQuantity = quantity + 1;
 
     if (newQuantity > 3) {

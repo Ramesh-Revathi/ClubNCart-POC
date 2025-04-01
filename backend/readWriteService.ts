@@ -202,6 +202,91 @@ app.post("/addcartold", (req: Request, res: Response) => {
         }
     });
 });
+
+
+app.post("/updatefee", (req: Request, res: Response) => {
+    const {mobile, handlingfee, deliveryfee, productTotalAmount, payableAmount } = req.body;
+
+    fs.readFile(cartFilePath, "utf8", (err, fileData) =>{
+        if (err) {
+            return res.status(500).json({ message: "Error reading file" });
+        }
+
+        let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+
+        const existingUserIndex = jsonData.findIndex(user => user.mobile === mobile);
+
+        if(existingUserIndex !== -1) {
+            jsonData[existingUserIndex].handlingfee = handlingfee;
+            jsonData[existingUserIndex].deliveryfee = deliveryfee;
+            jsonData[existingUserIndex].productTotalAmount = productTotalAmount;
+            jsonData[existingUserIndex].payableAmount = payableAmount;
+            jsonData[existingUserIndex].paymentMode = 'online';
+        }
+
+        fs.writeFile(cartFilePath, JSON.stringify(jsonData, null, 4), (writeErr) => {
+            if (writeErr) {
+                return res.status(500).json({ message: "Error writing file" });
+            }
+            return res.json({ message: "Item processed successfully" });
+        });
+
+    })
+});
+
+app.post("/updateaddress", (req: Request, res: Response) => {
+    const {mobile, address } = req.body;
+
+    fs.readFile(cartFilePath, "utf8", (err, fileData) =>{
+        if (err) {
+            return res.status(500).json({ message: "Error reading file" });
+        }
+
+        let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+
+        const existingUserIndex = jsonData.findIndex(user => user.mobile === mobile);
+
+        if(existingUserIndex !== -1) {
+            jsonData[existingUserIndex].shippingAddress = address; 
+        }
+
+        fs.writeFile(cartFilePath, JSON.stringify(jsonData, null, 4), (writeErr) => {
+            if (writeErr) {
+                return res.status(500).json({ message: "Error writing file" });
+            }
+            return res.json({ message: "Item processed successfully" });
+        });
+
+    })
+});
+
+// app.post("/updatePaymentMode", (req: Request, res: Response) => {
+//     const {mobile, mode } = req.body;
+    
+//     fs.readFile(cartFilePath, "utf8", (err, fileData) =>{
+//         if (err) {
+//             return res.status(500).json({ message: "Error reading file" });
+//         }
+
+//         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
+
+//         const existingUserIndex = jsonData.findIndex(user => user.mobile === mobile);
+
+//         if(existingUserIndex !== -1) {
+//             jsonData[existingUserIndex].paymentMode = mode; 
+//         }
+
+//         fs.writeFile(cartFilePath, JSON.stringify(jsonData, null, 4), (writeErr) => {
+//             if (writeErr) {
+//                 return res.status(500).json({ message: "Error writing file" });
+//             }
+//             return res.json({ message: "Item processed successfully" });
+//         });
+
+//     })
+// });
+
+
 app.post("/addcart", (req: Request, res: Response) => {
     const { mobile, item } = req.body;
 
@@ -250,6 +335,8 @@ app.post("/addcart", (req: Request, res: Response) => {
         });
     });
 });
+
+
 app.post("/removecartold", (req: Request, res: Response) => {
     const { mobile, item } = req.body;
 
@@ -347,12 +434,12 @@ app.post("/getcart", (req: Request, res: Response) => {
         }
 
         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
-        console.log("jsondata",jsonData);
+        // console.log("jsondata",jsonData);
         // Find if the user already exists based on mobile
         if(jsonData.length>0){
             const existingUser:any = jsonData.find(user => user.mobile === mobile);
-            console.log("existingUser",existingUser);
-            console.log("existingUser?.length",existingUser?.length);
+            // console.log("existingUser",existingUser);
+            // console.log("existingUser?.length",existingUser?.length);
             if(existingUser === undefined){
                 return res.json({ message: "Cart Empty", cartitems:[] });
             }
@@ -397,6 +484,12 @@ const orderID = `${today.getDate().toString().padStart(2, "0")}${(today.getMonth
             transactionDate:date,
             transAmount:amount,
             product: userCartData.product,
+            handlingfee: userCartData.handlingfee,
+            deliveryfee: userCartData.deliveryfee,
+            productTotalAmount: userCartData.productTotalAmount,
+            payableAmount: userCartData.payableAmount,
+            shippingAddress: userCartData.shippingAddress,
+            paymentMode: userCartData.paymentMode
         };
 
         fs.readFile(orderFilePath, "utf8", (err, fileData) => {
@@ -446,7 +539,7 @@ app.post("/getOrderold", (req: Request, res: Response) => {
         }
 
         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
-        console.log("jsondata",jsonData);
+        // console.log("jsondata",jsonData);
         // Find if the user already exists based on mobile
         if(jsonData.length>0){
             const existingOrder:any[] = jsonData.find(user => user.mobile === mobile);
@@ -477,7 +570,7 @@ app.post("/getOrderold2", (req: Request, res: Response) => {
         }
 
         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
-        console.log("jsondata", jsonData);
+        // console.log("jsondata", jsonData);
 
         if (jsonData.length > 0) {
             // Retrieve all orders for the given mobile number
@@ -498,6 +591,7 @@ app.post("/getOrderold2", (req: Request, res: Response) => {
         }
     });
 });
+
 app.post("/getOrder", (req: Request, res: Response) => {
     const { mobile } = req.body;
 
@@ -507,24 +601,24 @@ app.post("/getOrder", (req: Request, res: Response) => {
         }
 
         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
-        console.log("jsondata", jsonData);
 
         if (jsonData.length > 0) {
             // Retrieve all orders for the given mobile number
-            const userOrders = jsonData.filter(order => order.mobile === mobile);
-            console.log("userOrders", userOrders);
+            const userOrders = jsonData
+                .filter(order => order.mobile === mobile)
+                .sort((a, b) => new Date(b.transactionDate).getTime() - new Date(a.transactionDate).getTime());
 
             if (userOrders.length === 0) {
                 return res.status(300).json({ message: "Order Empty", orderitems: [] });
             }
 
-            // Return all orders for the user (not just the latest one)
             return res.status(200).json({ message: "Order Items Exist", orderitems: userOrders });
         } else {
             return res.status(300).json({ message: "Order Empty", orderitems: [] });
         }
     });
 });
+
 
 app.post("/addAddress", (req: Request, res: Response): void => {
     const { mobile, address } = req.body;
@@ -613,15 +707,6 @@ app.get("/getAddress", (req: Request, res: Response): void => {
 app.post("/getAddressForCart", (req: Request, res: Response): void => {
     let { mobile } = req.body;
 
-    // Clean up mobile number (remove spaces, ensure proper format)
-    // if (mobile) {
-    //     mobile = mobile.toString().trim();
-    //     // Ensure it starts with + if it's supposed to
-    //     if (!mobile.startsWith('+') && mobile.startsWith('91')) {
-    //         mobile = +${mobile};
-    //     }
-    // }
-
     if (!mobile) {
         res.status(400).json({ error: "Mobile number is required" });
         return;
@@ -679,7 +764,7 @@ app.post("/getProductByHcode", (req: Request, res: Response) => {
         }
 
         let jsonData: any[] = fileData ? JSON.parse(fileData) : [];
-        console.log("jsondata",jsonData);
+        // console.log("jsondata",jsonData);
         // Find if the user already exists based on mobile
         if(jsonData.length>0){
             const product:any = jsonData.find(prod => prod.hcategory === code);

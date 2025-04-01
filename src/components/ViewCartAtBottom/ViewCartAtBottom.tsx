@@ -2,8 +2,9 @@ import React, { FC, useEffect, useState } from 'react';
 import {
   getAddressForCart,
   getCart,
+  updateAddress,
+  updateFee,
 } from '../../services/auth-handler.service';
-import FreeDeliveryBanner from '../FreeDeliveryBanner/FreeDeliveryBanner';
 import PaymentModeComponent from '../paymentModeComponent/paymentModeComponent';
 import { ViewCartAtBottomWrapper } from './ViewCartAtBottom.styled';
 
@@ -12,6 +13,9 @@ interface ViewCartAtBottomProps {
   quantity: { quantity: number; product: any }[]; // Number of items in the cart
   routeFlag: string;
   payableAmount: number;
+  handlingfee: number;
+  deliveryfee: number;
+  productTotalAmount: number;
   viewCartBottomChange: (data: any[]) => void; // Function prop
 }
 
@@ -30,8 +34,11 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
   style,
   quantity,
   routeFlag,
+  handlingfee,
+  deliveryfee,
   viewCartBottomChange,
   payableAmount,
+  productTotalAmount,
 }) => {
   const [hideNshow, setHideNshow] = useState<'block' | 'none'>('none');
   const [pgModeOpen, setPgModeOpen] = useState(false);
@@ -71,8 +78,20 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
   // Example: Toggle the visibility based on quantity
 
   useEffect(() => {
-    const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]');
-    ;
+    const fetchData = async () => {
+      console.log('addressResponse');
+
+      const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]').user;
+      const addressResponse = await updateAddress(userdataObj?.mobile, selectedAddress?.address);
+      console.log('addressResponse', addressResponse);
+    };
+    if(selectedAddress){
+      fetchData();
+    }
+  }, [selectedAddress]);
+
+  useEffect(() => {
+    const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]').user;
     console.log('quantity - yourd', quantity);
     if (quantity?.length > 0) {
       clearCart();
@@ -84,6 +103,8 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
       setHideNshow("none");
     }
   }, [quantity]);
+
+
 
   const fetchAddresses = async (mobile: string) => {
     try {
@@ -117,13 +138,14 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
     if (userdataObj) {
       console.log('cartItems before getcart', cartItems);
       loadCart(userdataObj);
-      fetchAddresses(userdataObj?.mobile);
+      fetchAddresses(userdataObj?.user?.mobile);
     }
   }, [cartItems, totalAmount]);
 
   useEffect(() => {
     console.log('addressess in cart', addresses);
   }, [addresses]);
+
   const loadCart = async (user: any) => {
     //clearCart();
     const cartResponse = await getCart({ mobile: user?.mobile });
@@ -139,6 +161,7 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
       );
     }
   };
+  
   const clearCart = () => {
     setCartItems(0);
     setTotalAmount(0.0);
@@ -190,6 +213,19 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
     e.stopPropagation();
     setAddressModalOpen(true);
   };
+
+  const handleUpdateFee = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]').user;
+    const updateResponse = await updateFee(userdataObj?.mobile, handlingfee, deliveryfee, productTotalAmount, payableAmount);
+    console.log('updateResponse', updateResponse);
+    if (updateResponse?.statusText === 'OK') {
+      console.log('Fee updated successfully');
+    window.location.href = "/pay";
+
+    }
+  }
+  
   return (
     <ViewCartAtBottomWrapper data-testid="ViewCartAtBottom">
       <div style={{ zIndex: '999' }}>
@@ -268,7 +304,8 @@ const ViewCartAtBottom: FC<ViewCartAtBottomProps> = ({
                   </div>
                 </div>
                 <a
-                  href="/pay"
+                  onClick={handleUpdateFee}
+                  // href="/pay"
                   className="text-sm font-semibold text-yellow-400 underline"
                   style={{
                     whiteSpace: "nowrap", // Prevent text wrapping

@@ -28,12 +28,10 @@ const ProfilePage: FC<ProfilePageProps> = () => {
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("userData");
-    console.log(storedUser,"jhxgfxf");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      
       console.log(parsedUser);
-      setUser(parsedUser);
+      setUser(parsedUser.user);
     }
   }, []);
   interface AccordionItem {

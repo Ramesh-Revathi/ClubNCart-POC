@@ -90,8 +90,7 @@ const productSearchComponent: FC<productSearchComponentProps> = ({ cartItemQuant
   useEffect(() => {
     // Perform tasks like fetching data
     setisLoggedIn(!!sessionStorage.getItem("loggedUserMobNo"));
-    setUserData(JSON.parse(sessionStorage.getItem("userData") || "[]"
-    ));
+    setUserData(JSON.parse(sessionStorage.getItem("userData") || "[]").user);
   }, [userLoginNo]);
   useEffect(() => {
     if (userdata) {

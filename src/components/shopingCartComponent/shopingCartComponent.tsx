@@ -92,7 +92,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
   }, []);
   useEffect(() => {
     try {
-      setUserData(JSON.parse(sessionStorage.getItem('userData') || '[]'));
+      setUserData(JSON.parse(sessionStorage.getItem('userData') || '[]').user);
       const data: CartItem[] = JSON.parse(
         sessionStorage.getItem('cartItemCount') || 'null'
       );

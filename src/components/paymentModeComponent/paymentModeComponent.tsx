@@ -8,9 +8,11 @@ import {
    Typography,
    Box,
  } from '@mui/material';
- import { FC, useState } from 'react';
+ import { FC, useEffect, useState } from 'react';
  import CloseIcon from '@mui/icons-material/Close';
  import { paymentModeComponentWrapper } from './paymentModeComponent.styled';
+
+ import{updatePaymentMode} from '../../services/auth-handler.service';
  
  interface PaymentModeComponentProps {
    pgOpen: boolean;
@@ -28,6 +30,18 @@ import {
    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
      setSelectedPaymentMode(event.target.value);
    };
+
+  // useEffect(() => {
+  //      const fetchData = async () => {
+  //         console.log('modeResponse');
+    
+  //         const userdataObj = JSON.parse(sessionStorage.getItem('userData') || '[]').user;
+  //         const modeResponse = await updatePaymentMode(userdataObj?.mobile, selectedPaymentMode);
+  //         console.log('modeResponse', modeResponse);
+  //       };
+  //       fetchData();
+
+  // }, [selectedPaymentMode]);
  
    return (
      <paymentModeComponentWrapper data-testid="paymentModeComponent">

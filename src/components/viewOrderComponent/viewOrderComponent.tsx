@@ -18,9 +18,9 @@ const ViewOrderComponent: FC = () => {
   const [openOrder, setOpenOrder] = useState<number | null>(null);
 
   useEffect(() => {
-    const userDataFromStorage = localStorage.getItem('userData');
+    const userDataFromStorage = sessionStorage.getItem('userData');
     if (userDataFromStorage) {
-      setUserData(JSON.parse(userDataFromStorage));
+      setUserData(JSON.parse(userDataFromStorage).user);
     }
   }, []);
 
@@ -159,10 +159,11 @@ const ViewOrderComponent: FC = () => {
                     <div className="mt-6 bg-white shadow-md rounded-xl p-4 border border-green-300">
                       <h4 className="font-semibold text-lg text-green-800">Order Summary</h4>
                       <div className="text-green-700 font-medium">
-                        <div>Total Amount: ₹{order.totalAmount}</div>
-                        <div>Delivery Fee: ₹{order.deliveryFee}</div>
-                        <div>Handling Fee: ₹{order.handlingFee}</div>
-                        <div className="mt-2 text-lg font-bold">Grand Total: ₹{order.grandTotal}</div>
+                        <div>Payment Mode: {order.paymentMode}</div>
+                        <div>Total Amount: ₹{order.productTotalAmount}</div>
+                        <div>Delivery Fee: ₹{order.deliveryfee}</div>
+                        <div>Handling Fee: ₹{order.handlingfee}</div>
+                        <div className="mt-2 text-lg font-bold">Grand Total: ₹{order.payableAmount}</div>
                       </div>
                     </div>
                   </div>

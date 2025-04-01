@@ -34,7 +34,7 @@ const AddressBook: FC<AddressBookProps> = () => {
     const userData = sessionStorage.getItem("userData");
     
     if (userData) {
-      let parsedData = JSON.parse(userData);
+      let parsedData = JSON.parse(userData).user;
   
       // Update the selected address in session storage
       parsedData.address = address;  // Updating the address field
@@ -50,7 +50,7 @@ const AddressBook: FC<AddressBookProps> = () => {
     const storedUser = sessionStorage.getItem('userData');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      const mobile = parsedUser.mobile;
+      const mobile = parsedUser.user.mobile;
 
       fetch(
         `http://localhost:5000/getAddress?mobile=${encodeURIComponent(mobile)}`
@@ -105,7 +105,7 @@ const AddressBook: FC<AddressBookProps> = () => {
       return;
     }
 
-    const parsedUser = JSON.parse(storedUser);
+    const parsedUser = JSON.parse(storedUser).user;
     const mobile = parsedUser.mobile;
 
     fetch('http://localhost:5000/addAddress', {
