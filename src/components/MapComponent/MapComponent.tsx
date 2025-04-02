@@ -101,33 +101,46 @@ const MapLibreWithSuggestions: React.FC<MapLibreWithSuggestionsProps> = ({ deliv
     }
   };
   return (
-    <div>
-           <div style={{ textAlign: "center", marginBottom: "10px" }}>
-  <input
-    type="text"
-    placeholder="Enter a pincode"
-    onBlur={(e) => handlePincodeSearch(e.target.value)}
-    style={{
-      padding: "10px",
-      width: "70%",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
-      marginRight: "10px",
-    }}
+    <div className="flex flex-col items-center w-full p-3">
+  {/* Pincode Input */}
+  <div className="relative w-full max-w-xs">
+    <input
+      type="text"
+      placeholder="Enter Pincode"
+      onBlur={(e) => handlePincodeSearch(e.target.value)}
+      className="w-full p-3 text-center rounded-lg bg-white/10 backdrop-blur-md text-white placeholder-gray-300 border border-white/20 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+    />
+  </div>
+
+  {/* Selected Address */}
+  <p className="mt-2 text-sm text-white/80">{selectedAddress || "Select a location on the map"}</p>
+
+  {/* Scrollable Map Container */}
+  <div
+    ref={mapContainerRef}
+    className="mt-3 w-full h-60 max-h-[400px] rounded-xl shadow-xl overflow-auto border border-white/20 backdrop-blur-md bg-white/10 custom-scroll"
   />
+  <style>{`
+  .custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+  .custom-scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+  }
+  .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+`}</style>
 </div>
-<p style={{ textAlign: "center", marginTop: "10px", color: "darkslategray" }}>
-        {selectedAddress || "Select a location on the map"}
-      </p>
-      <div
-        ref={mapContainerRef}
-        style={{
-          height: "60vh",
-          width: "100%",
-          borderRadius: "8px",
-        }}
-      />
-    </div>
+
   );
 };
 

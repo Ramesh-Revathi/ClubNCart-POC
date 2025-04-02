@@ -182,24 +182,24 @@ const ProductListDisplay: FC<ProductListDisplayProps> = ({
 
   return (
     <ProductListDisplayWrapper data-testid="ProductListDisplay">
-      <div className="flex bg-white-700" style={{ height: '50%' }}>
-        <header
-          className="fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 via-green-400 to-green-300 shadow-lg z-10 backdrop-blur-lg"
-          style={{ height: '8%' }} // Reduced height
-        >
-          <div className="p-3 relative flex items-center justify-between">
-            {/* Back Button */}
-            <a
-              href="/"
-              style={{ textDecoration: 'none' }}
-              className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
-            >
-              <img
-                src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
-                alt="Back"
-                className="w-4 h-4" // Reduced size
-              />
-            </a>
+      <div className="flex bg-white-700" style={{ height: "50%" }}>
+      <header
+  className="hidden fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 via-green-400 to-green-300 shadow-lg z-10 backdrop-blur-lg"
+  style={{ height: "8%" }} // Reduced height
+>
+  <div className="p-2 relative flex items-center justify-between">
+    {/* Back Button */}
+    <a
+      href="/"
+      style={{ textDecoration: "none" }}
+      className="flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md transform transition-transform hover:scale-110"
+    >
+      <img
+        src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"
+        alt="Back"
+        className="w-4 h-4" // Reduced size
+      />
+    </a>
 
             {/* Category Title */}
             <div className="text-xl font-semibold text-white text-center flex-grow">

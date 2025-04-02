@@ -14,6 +14,7 @@ import OtpComponentStories from "../otpComponent/otpComponent.stories";
 import OtpComponent from "../otpComponent/otpComponent";
 import MdAddressDetailsPopup from "../MdAddressDetailsPopup/MdAddressDetailsPopup";
 import AddressMapComponent from "../addressMapComponent/addressMapComponent";
+import { motion } from "framer-motion";
 
 interface RegisterMobileNoPopupProps {
   open: boolean;
@@ -95,89 +96,72 @@ const onOtpAddressConfirm = (data:any) => {
 
   return (
     <registerMobileNoPopupWrapper data-testid="registerMobileNoPopup">
-      <div className="flex justify-center items-center">
+      <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      className="flex justify-center items-center bg-gradient-to-br from-gray-900 to-black"
+    >
       <Dialog
-    open={open}
-    onClose={(event, reason) => {
-      if (reason !== "backdropClick") {
-        handleClose();
-      }
-    }}
-    fullWidth
-    maxWidth="xs"
-    sx={{
-      "& .MuiPaper-root": {
-        borderRadius: "2px",
-        margin: "0",
-        position: "absolute",
-        bottom: { xs: 0, sm: "auto" },
-        transform: { xs: "translateY(0)", sm: "translateY(-50%)" },
-        top: { sm: "50%" },
-        left: { sm: "50%" },
-        transformOrigin: "center",
-        width: "100%",
-      },
-    }}
-  >
-    <DialogTitle>
-      <Typography variant="h6" align="center">
-        {/* Dialog Title */}
-      </Typography>
-      {/* Close Icon */}
-      <IconButton
-        aria-label="close"
-        onClick={handleClose}
-        style={{ position: "absolute", right: 8, top: 8, display: "none" }}
+        open={open}
+        onClose={(event, reason) => reason !== "backdropClick" && handleClose()}
+        fullWidth
+        maxWidth="xs"
+        sx={{
+          "& .MuiPaper-root": {
+            borderRadius: "20px",
+            backdropFilter: "blur(10px)",
+            background: "rgba(255, 255, 255, 0.1)",
+            boxShadow: "0px 4px 30px rgba(0, 0, 0, 0.3)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            padding: "20px",
+          },
+        }}
       >
-        <CloseIcon />
-      </IconButton>
-    </DialogTitle>
-    <DialogContent>
-      <Typography variant="body2" className="pb-4">
-        <div>
-          <h3 className="text-sm leading-8 text-left text-black font-medium">
-            Welcome to ClubnCart
-          </h3>
-          <div className="text-xs font-light">
-            Login or Signup to your account for a better experience
-          </div>
-        </div>
-      </Typography>
-      <div className="input-group mb-0">
-        <span className="input-group-text" id="inputGroup-sizing-default">
-          +91
-        </span>
-        <input
-          type="text"
-          className={`form-control ${errorMessage ? "border-red-500" : ""}`}
-          aria-label="Mobile number input"
-          aria-describedby="inputGroup-sizing-default"
-          value={mobileNumber}
-          placeholder="Enter Mobile Number"
-          onChange={(e) => {
-            const value = e.target.value;
-            setMobileNumber(value);
-            validateMobileNumber(value);
-          }}
-        />
-      </div>
-      {errorMessage && (
-        <div className="text-xs text-red-500 mt-1">{errorMessage}</div>
-      )}
-    </DialogContent>
-    <DialogActions style={{ paddingBottom: "25px" }}>
-      <Button
-        style={{ backgroundColor: "#fff6a3", color: "black" }}
-        onClick={handleConfirm}
-        className="w-full text-gray-500"
-        variant="contained"
-        disabled={!isMobileNumberValid}
-      >
-        Continue
-      </Button>
-    </DialogActions>
-  </Dialog>
-      </div>
+        <DialogTitle className="relative flex justify-center text-white">
+          <h3 className="text-lg font-semibold">Welcome to ClubnCart</h3>
+          {/* <CloseIcon className="hidden absolute right-4 cursor-pointer text-gray-400 hover:text-white" onClick={handleClose} /> */}
+        </DialogTitle>
+
+        <DialogContent>
+          <motion.div initial={{ y: 20 }} animate={{ y: 0 }} className="space-y-3">
+            <p className="text-center text-gray-300 text-sm">
+              Login or Signup to your account for a better experience.
+            </p>
+
+            <div className="relative">
+              <input
+                type="text"
+                className={`w-full p-3 rounded-xl text-sm text-white bg-transparent border ${
+                  errorMessage ? "border-red-500" : "border-gray-400"
+                } outline-none transition-all focus:ring-2 focus:ring-orange-400`}
+                placeholder="+91 Enter Mobile Number"
+                value={mobileNumber}
+                onChange={(e) => {
+                  setMobileNumber(e.target.value);
+                  validateMobileNumber(e.target.value);
+                }}
+              />
+              {/* <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">+91</span> */}
+            </div>
+
+            {errorMessage && <p className="text-yellow-500 text-xs">{errorMessage}</p>}
+          </motion.div>
+        </DialogContent>
+
+        <DialogActions className="flex justify-center pb-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full px-4 py-3 text-black font-semibold bg-menuHilight rounded-xl shadow-md hover:shadow-lg transition-all"
+            disabled={mobileNumber.length !== 10}
+            onClick={handleConfirm}
+          >
+            Continue
+          </motion.button>
+        </DialogActions>
+      </Dialog>
+    </motion.div>
                 <OtpComponent
                   open={otpOpen}
                   handleClose={handleOtpClose}

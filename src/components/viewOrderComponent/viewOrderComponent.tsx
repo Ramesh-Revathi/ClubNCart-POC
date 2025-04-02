@@ -84,7 +84,7 @@ const ViewOrderComponent: FC = () => {
     <viewOrderComponentWrapper data-testid="viewOrderComponent">
       <div className="p-0 bg-green-100">
         {/* 🌟 Sticky Order Header */}
-        <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 to-green-600 shadow-xl z-20 flex items-center px-4 py-3 rounded-b-2xl">
+        <header className="hidden fixed top-0 left-0 w-full bg-gradient-to-r from-green-500 to-green-600 shadow-xl z-20 flex items-center px-4 py-3 rounded-b-2xl">
           <a href="/" className="w-8">
             <img
               src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg"

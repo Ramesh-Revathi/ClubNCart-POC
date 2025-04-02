@@ -46,7 +46,7 @@ const Products: FC<ProductsProps> = () =>{
   
    return (
  <ProductsWrapper data-testid="Products">
-           <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
+           <header className="hidden fixed top-0 left-0 w-full bg-white shadow-md z-10">
         <div className="p-4">
         <div className="flex items-center w-full"><a onClick={() => navigate(-1)} className="w-7"><img src="https://www.kpnfresh.com/_next/static/media/back-button-arrow.8ac29b56.svg" alt="Bananas" /></a>
          <div className="flex justify-between items-center flex-1 w-full"><div className="text-lg pl-2 font-medium">{product.category}</div>

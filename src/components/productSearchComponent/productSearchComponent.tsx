@@ -138,7 +138,7 @@ const productSearchComponent: FC<productSearchComponentProps> = ({ cartItemQuant
     <productSearchComponentWrapper data-testid="productSearchComponent">
       <div className="min-h-screen p-1 bg-gray-50">
         <header
-          className="fixed top-0 left-0 w-full z-10 shadow-lg bg-gradient-to-r from-green-500 via-green-400 to-green-300 rounded-b-lg backdrop-blur-lg flex items-center"
+          className="hidden fixed top-0 left-0 w-full z-10 shadow-lg bg-gradient-to-r from-green-500 via-green-400 to-green-300 rounded-b-lg backdrop-blur-lg flex items-center"
           style={{ height: "56px" }} // Fixed height for consistency
         >
           <div className="w-full flex items-center justify-between px-4">
