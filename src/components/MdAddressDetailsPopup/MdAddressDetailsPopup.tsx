@@ -13,6 +13,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { FC, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { MdAddressDetailsPopupWrapper } from './MdAddressDetailsPopup.styled';
+import { motion } from 'framer-motion';
 
 interface MdAddressDetailsPopupProps {
   open: boolean;
@@ -57,139 +58,151 @@ const MdAddressDetailsPopup: FC<MdAddressDetailsPopupProps> = ({
   return (
     <MdAddressDetailsPopupWrapper data-testid="MdAddressDetailsPopup">
       <Dialog
-        open={open}
-        onClose={(event, reason) => {
-          if (reason !== "backdropClick") {
-            handleClose();
-          }
-        }}
-        fullWidth
-        maxWidth="xs"
-        sx={{
-          '& .MuiPaper-root': {
-            borderRadius: '20px',
-            margin: '0',
-            position: 'absolute',
-            bottom: { xs: 0, sm: 'auto' },
-            transform: { xs: 'translateY(0)', sm: 'translateY(-50%)' },
-            top: { sm: '50%' },
-            left: { sm: '50%' },
-            transformOrigin: 'center',
-            width: '100%',
-          },
-        }}
+  open={open}
+  onClose={(event, reason) => {
+    if (reason !== "backdropClick") {
+      handleClose();
+    }
+  }}
+  fullWidth
+  maxWidth="xs"
+  sx={{
+    "& .MuiPaper-root": {
+      borderRadius: "20px",
+      background: "rgba(255, 255, 255, 0.1)", // Glassmorphism effect
+      boxShadow: "0px 4px 30px rgba(34, 197, 94, 0.3)", // Green soft glow
+      backdropFilter: "blur(20px)", // Frosted glass effect
+      border: "1px solid rgba(255, 255, 255, 0.2)", // Subtle border
+      bottom: { xs: 0, sm: "auto" },
+      transform: { xs: "translateY(0)", sm: "translateY(-50%)" },
+      top: { sm: "50%" },
+      left: { sm: "50%" },
+      transformOrigin: "center",
+      width: "100%",
+    },
+  }}
+>
+  {/* Animated Dialog Title */}
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4, ease: "easeOut" }}
+  >
+    <DialogTitle sx={{ textAlign: "center", color: "white" }}>
+      <Typography variant="h6" fontWeight="bold">
+        Add Address Details
+      </Typography>
+      <Typography variant="subtitle2" sx={{ fontSize: 11, color: "rgba(255, 255, 255, 0.7)" }}>
+        Note: A detailed address helps delivery partners reach you easily.
+      </Typography>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{ position: "absolute", right: 8, top: 8, color: "white" }}
       >
-        <DialogTitle sx={{ mr: 2 }}>
-          <Typography variant="subtitle1" align="left">
-            Add Address Details
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            sx={{ fontSize: 11, color: 'gray' }}
-            align="left"
-          >
-            Note: Detailed address will help our delivery partner reach your
-            place easily
-          </Typography>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            style={{ position: 'absolute', right: 8, top: 8, display: 'none' }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <TextField
-            fullWidth
-            label="Enter Full Name*"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            fullWidth
-            label="Enter House / Flat / Block No*"
-            value={addressLine1}
-            onChange={(e) => setAddressLine1(e.target.value)}
-            margin="normal"
-          />
-          <TextField
-            fullWidth
-            label="Road / Area / Locality*"
-            value={addressLine2}
-            multiline
-            minRows={3}
-            onChange={(e) => setAddressLine2(e.target.value)}
-            margin="normal"
-          />
+        <CloseIcon />
+      </IconButton>
+    </DialogTitle>
+  </motion.div>
 
-          {/* Custom Address Type Selector */}
-          <Typography variant="subtitle1" align="left" sx={{ mt: 2, mb: 1 }}>
-            Address Type
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <Button
-              variant='outlined'
-              onClick={() => setAddressType('Home')}
-              sx={{
-                flex: 1,
-                textTransform: 'none',
+  {/* Animated Dialog Content */}
+  <DialogContent>
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
+    >
+      {["Enter Full Name*", "Enter House / Flat / Block No*", "Road / Area / Locality*"].map((label, index) => (
+        <TextField
+          key={index}
+          fullWidth
+          label={label}
+          value={index === 0 ? fullName : index === 1 ? addressLine1 : addressLine2}
+          onChange={(e) =>
+            index === 0 ? setFullName(e.target.value) : index === 1 ? setAddressLine1(e.target.value) : setAddressLine2(e.target.value)
+          }
+          margin="normal"
+          variant="outlined"
+          multiline={label === "Road / Area / Locality*"}
+          minRows={label === "Road / Area / Locality*" ? 3 : 1}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              background: "rgba(255, 255, 255, 0.2)",
+              borderRadius: "10px",
+              color: "white",
+              borderColor: "rgba(255, 255, 255, 0.4)",
+            },
+            "& .MuiInputLabel-root": {
+              color: "white !important", // Ensuring white label color
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "rgba(255, 255, 255, 0.4)",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#F2C44C", // Golden border on hover
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#F2C44C", // Golden border when focused
+            },
+          }}
+        />
+      ))}
 
-                color: addressType === 'Home' ? 'black' : 'gray',
-                borderColor: addressType === 'Home' ? '#e7d30b' : 'gray',
-
-                '&:hover': {
-                  borderColor: 'black',
-                },
-              }}
-            >
-              Home
-            </Button>
-            <Button
-              variant='outlined'
-              onClick={() => setAddressType('Office')}
-              sx={{
-                flex: 1,
-                textTransform: 'none',
-
-                color: addressType === 'Office' ? 'black' : 'gray',
-                borderColor: addressType === 'Office' ? '#e7d30b' : 'gray',
-
-                '&:hover': {
-                  borderColor: 'black',
-                },
-              }}
-            >
-              Office
-            </Button>
-            <Button
-              variant='outlined'
-              onClick={() => setAddressType('Other')}
-              sx={{
-                flex: 1,
-                textTransform: 'none',
-                //   backgroundColor: addressType === 'Other' ? '#fff6a3' : 'transparent',
-                color: addressType === 'Other' ? 'black' : 'gray',
-                borderColor: addressType === 'Other' ? '#e7d30b' : 'gray',
-
-              }}
-            >
-              Other
-            </Button>
-          </Box>
-        </DialogContent>
-        <DialogActions style={{ paddingBottom: '25px' }}>
+      {/* Address Type Selector */}
+      <Typography variant="subtitle1" sx={{ mt: 2, mb: 1, color: "#F2C44C" }}>
+        Address Type
+      </Typography>
+      <Box sx={{ display: "flex", gap: 2 }}>
+        {["Home", "Office", "Other"].map((type) => (
           <Button
-            style={{ backgroundColor: '#fdea2c', color: 'black' }}
-            onClick={handleSave}
-            className="w-full text-gray-500"
-            variant="contained"
+            key={type}
+            variant="outlined"
+            onClick={() => setAddressType(type)}
+            sx={{
+              flex: 1,
+              textTransform: "none",
+              color: addressType === type ? "#065f46" : "#F2C44C",
+              borderColor: addressType === type ? "#F2C44C" : "rgba(255, 255, 255, 0.5)",
+              backgroundColor: addressType === type ? "rgba(242, 196, 76, 0.2)" : "transparent",
+              "&:hover": {
+                borderColor: "#F2C44C",
+                backgroundColor: "rgba(242, 196, 76, 0.3)",
+              },
+            }}
           >
-            Save Address
+            {type}
           </Button>
-        </DialogActions>
-      </Dialog>
+        ))}
+      </Box>
+    </motion.div>
+  </DialogContent>
+
+  {/* Animated Dialog Actions */}
+  <DialogActions sx={{ pb: 3, display: "flex", justifyContent: "center" }}>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay: 0.4, ease: "easeOut" }}
+      className="w-full"
+    >
+      <Button
+        sx={{
+          width: "100%",
+          background: "#F2C44C",
+          color: "white",
+          fontWeight: "bold",
+          borderRadius: "12px",
+          boxShadow: "0px 4px 10px rgba(242, 196, 76, 0.4)",
+          "&:hover": { background: "#E0B040" },
+        }}
+        onClick={handleSave}
+        variant="contained"
+      >
+        Save Address
+      </Button>
+    </motion.div>
+  </DialogActions>
+</Dialog>
     </MdAddressDetailsPopupWrapper>
   );
 };

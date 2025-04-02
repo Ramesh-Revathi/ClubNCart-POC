@@ -1,87 +1,53 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TermsOfUseWrapper } from './TermsOfUse.styled';
 
 interface TermsOfUseProps {}
 
 const TermsOfUse: FC<TermsOfUseProps> = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <TermsOfUseWrapper data-testid="TermsOfUse">
-      <div>
-        <div className="bg-white p-3 shadow-md">
-          <div className="flex justify-between">
-            <div className="flex gap-3">
-              <Link
-                className="text-gray-700"
-                style={{ textDecoration: 'none' }}
-                to={`/`}
-              >
-                <ArrowBackIcon />
-              </Link>
-              <h5>Terms of Use</h5>
-            </div>
-            <SearchIcon />
-          </div>
-        </div>
-        <div className="p-3">
-          <p className="font-bold text-lg">
-            Account and registration obligations
-          </p>
-          <p>
-            All buyers must register and sign in to place orders on the Site.
-            You must keep your account and registration details up to date and
-            correct for communications related to your purchase on the site. In
-            accordance with the terms and conditions, the consumer agrees to
-            receive promotional links and newsletters when registered. The
-            customer can withdraw by unsubscribing from "My Account" or by
-            contacting customer service.
-          </p>
-          <p className="font-bold text-lg">Price</p>
-          <p>
-            All products listed on the Site will be sold on MRP unless otherwise
-            specified. Prices specified at the time of order will be the prices
-            charged on the day of delivery. Although the prices of most products
-            do not change every day but some of the goods and prices of fresh
-            food change every day. In the event that prices are high or low on
-            the date of delivery no additional costs will be collected or
-            refunded as the situation may be at the time of delivery.
-          </p>
-          <p className="font-bold text-lg">Site / Customer Cancellation</p>
-          <p className="font-bold text-lg"> Refund & Refunds </p>
-          <p>
-            "We do not have any questions about the refund policy" which allows
-            all our members to return the product at the time of delivery if for
-            some reason they are not satisfied with the quality or youth of the
-            product. We will return the returned product with us and issue a
-            credit note on the number of return products that will be added to
-            your account on the Site. This can be used to pay off your next
-            purchase bills.
-          </p>
-          <p className='font-bold text-lg' >You must not use the Site for any of the following purposes:</p>
-          
-         <ul className='list-decimal list-outside'>
-            <li>Distribute any illegal, abusive, obscene, insulting, threatening,
-            harmful, obscene, obscene, or otherwise objectionable material.</li>
-<li>Transfer of property that promotes criminal conduct or that leads to
-          public liability or that violates any applicable laws, regulations or
-          operating code.</li>
-          <li> Obtaining unauthorized access to other computer
-          programs. </li>
-          <li>Interrupting any other person to use or enjoy the Site.</li>
-          <li>Violation of any applicable laws;</li>
-          <li>Disrupting or disrupting networks or websites linked to the Site.</li>
-          <li>To make, transfer or retain electronic copies of copyright-protected material without the owner's permission.</li>
-         </ul>
-          
-          <p className='font-bold text-lg'>Colors</p>
-          <p> We have made every effort to display the colors of our products
-          from the Website as accurately as possible. However, since the actual
-          colors you see will depend on your monitor, we cannot guarantee that
-          your monitor of any color will be accurate.</p>
-        </div>
-      </div>
+      <div className="bg-green-100 text-gray-900 px-2 pb-3 flex justify-center" style={{paddingTop:"50px"}}>
+  <div className="mt-6 p-6 bg-white/50 backdrop-blur-lg shadow-xl rounded-2xl text-gray-800 overflow-auto max-h-[85vh] w-full max-w-3xl border border-green-200 custom-scroll">
+    
+    <h2 className="text-2xl font-extrabold text-green-800 mb-3">Account and Registration Obligations</h2>
+    <p className="mb-4">
+      All buyers must register and sign in to place orders on the Site. Keep your account details up to date 
+      for seamless communication. You may opt out of promotional emails anytime.
+    </p>
+
+    <h2 className="text-2xl font-extrabold text-green-800 mb-3">Price</h2>
+    <p className="mb-4">
+      All products will be sold at MRP unless specified. Prices at the time of order will be final, with 
+      no adjustments for price fluctuations at delivery.
+    </p>
+
+    <h2 className="text-2xl font-extrabold text-green-800 mb-3">Refund & Returns</h2>
+    <p className="mb-4">
+      We offer a "No Questions Asked Refund Policy," allowing returns at delivery if you're unsatisfied. 
+      A credit note will be issued for returned items.
+    </p>
+
+    <h2 className="text-2xl font-extrabold text-green-800 mb-3">Prohibited Uses</h2>
+    <ul className="list-disc ml-6 mb-4 space-y-2 text-gray-700">
+      <li>Distributing illegal or harmful content.</li>
+      <li>Engaging in fraudulent or criminal activities.</li>
+      <li>Accessing unauthorized programs or data.</li>
+      <li>Disrupting website operations or networks.</li>
+      <li>Copying copyright-protected materials without permission.</li>
+    </ul>
+
+    <h2 className="text-2xl font-extrabold text-green-800 mb-3">Colors</h2>
+    <p className="mb-4">
+      We strive to display product colors accurately, but variations may occur based on your screen settings.
+    </p>
+  </div>
+</div>
     </TermsOfUseWrapper>
   );
 };

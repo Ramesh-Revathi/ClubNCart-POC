@@ -31,6 +31,7 @@ import {
 } from './services/auth-handler.service';
 import { setCsrfToken } from './services/axios-client';
 import StorageService from './services/storage.service';
+import MdPageHeader from './components/MdPageHeader/MdPageHeader';
 // import './App.css'
 interface userProfile {
   name: any;
@@ -78,6 +79,7 @@ const App: React.FC = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   //const [hoverSidebar, setHoverSidebar] = useState(false);
   const [routeFlag, setRouteFlag] = useState('list');
+  const [pageName, setPageName] = useState('/');
   const [quantity, setQuantity] = useState<
     { quantity: number; product: any }[]
   >([]); // Initial value
@@ -270,6 +272,9 @@ const App: React.FC = () => {
   };
   return (
     <>
+    <header>
+    <MdPageHeader routeFlag={routeFlag} selectedCategory={''} pageName={pageName}/>
+    </header>
       <RouteChangeHandler
         cartItemdata={setQuantity}
         routeFlag={setRouteFlag}
@@ -279,8 +284,7 @@ const App: React.FC = () => {
         grandTotal={setGrandTotal}
         handlingFee={setHandlingFee}
         productTotalAmount={setproductTotalAmount}
-        initLoadCart={initLoadCart}
-      />
+        initLoadCart={initLoadCart} pageName={setPageName}      />
       <Routes>
         <Route path="/" element={<MainHome />} />
         <Route
@@ -377,6 +381,7 @@ interface RouteChangeHandlerProps {
   handlingFee: (data: number | 0.0) => void;
   productTotalAmount: (data: number | 0.0) => void;
   initLoadCart: (data: any | []) => void;
+  pageName: (data: any | []) => void;
 }
 const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
   cartItemdata,
@@ -388,6 +393,7 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
   productTotalAmount,
   handlingFee,
   initLoadCart,
+  pageName
 }) => {
   const location = useLocation();
   const [payReq, setPayReq] = useState<payRequest>({
@@ -396,6 +402,7 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
   });
   useEffect(() => {
     console.log('Route changed:', location.pathname);
+    pageName(location.pathname);
     const loggedUserData = JSON.parse(
       sessionStorage.getItem('userData') || '[]'
     ).user;

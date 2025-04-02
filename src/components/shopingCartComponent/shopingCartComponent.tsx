@@ -229,7 +229,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
   return (
     <div className="p-0 bg-green-100">
       <header
-        className="fixed top-0 left-0 w-full z-10 shadow-lg bg-gradient-to-r from-green-500 via-green-400 to-green-300 rounded-b-lg backdrop-blur-lg"
+        className="hidden fixed top-0 left-0 w-full z-10 shadow-lg bg-gradient-to-r from-green-500 via-green-400 to-green-300 rounded-b-lg backdrop-blur-lg"
         style={{
           height: "8%", // Compact header height
         }}
