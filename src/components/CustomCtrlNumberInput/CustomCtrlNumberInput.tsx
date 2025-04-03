@@ -30,7 +30,7 @@ const CustomCtrlNumberInput: FC<CustomCtrlNumberInputProps> = ({
   const [products, setproducts] = useState();
 
   useEffect(() => {
-    setQuantity(0); // Reset to 0
+    //setQuantity(0); // Reset to 0
   }, [product.code]); // Trigger when product changes
 
   const handleIncrement = () => { 

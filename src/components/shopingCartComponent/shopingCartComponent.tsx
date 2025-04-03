@@ -96,6 +96,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
       const data: CartItem[] = JSON.parse(
         sessionStorage.getItem('cartItemCount') || 'null'
       );
+      console.log("data",data);
       if (data.length > 0) {
         setCartItems(data);
         setProductQuantities(data);
@@ -141,6 +142,7 @@ const ShoppingCartComponent: FC<ShoppingCartComponentProps> = ({
     ;
     if (cartResponse.statusText === 'OK') {
       const cartGetResponse = await getCart({ mobile: userdata?.mobile });
+      console.log("cartGetResponse",cartGetResponse);
       if (
         cartGetResponse?.statusText === 'OK' &&
         cartGetResponse?.data?.cartitems?.product?.length > 0
