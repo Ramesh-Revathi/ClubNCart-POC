@@ -108,6 +108,7 @@ const App: React.FC = () => {
   const [grandTotal, setGrandTotal] = useState<number | 0.0>(0.0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartSummaryData, setCartSummaryData] = useState<any>();
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   const [savedAddress, setSavedAddress] = useState<{
     fullName: string;
@@ -273,7 +274,7 @@ const App: React.FC = () => {
   return (
     <>
     <header>
-    <MdPageHeader routeFlag={routeFlag} selectedCategory={''} pageName={pageName}/>
+    <MdPageHeader routeFlag={routeFlag} selectedCategory={selectedCategory} pageName={pageName}/>
     </header>
       <RouteChangeHandler
         cartItemdata={setQuantity}
@@ -289,7 +290,7 @@ const App: React.FC = () => {
         <Route path="/" element={<MainHome />} />
         <Route
           path="/productlist/:id"
-          element={<ProductListDisplay cartItemQuantity={setQuantity} />}
+          element={<ProductListDisplay cartItemQuantity={setQuantity} selCategory={setSelectedCategory} />}
         />
         <Route path="/productview/:id" element={<Products />} />
         <Route
@@ -408,6 +409,7 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
     ).user;
     if (location.pathname === '/cart') {
       routeFlag('cart');
+      pageName("Shoping Cart")
     } else if (
       location.pathname === '/pay' ||
       location.pathname === '/confirmation' ||
@@ -416,6 +418,15 @@ const RouteChangeHandler: React.FC<RouteChangeHandlerProps> = ({
       routeFlag('pay');
     } else {
       routeFlag('list');
+    }
+    if (
+      location.pathname === '/pay'
+    ) {
+      pageName("Payment GateWay");
+    }else if(location.pathname === "/confirmation"){
+      pageName("Transaction Summary");
+    }else if(location.pathname === "/order"){
+      pageName("Your Order's");
     }
     if (cartSummaryData !== undefined) {
       handleViewCartBottomChange(cartSummaryData);

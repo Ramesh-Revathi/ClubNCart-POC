@@ -12,6 +12,7 @@ import { ProductListDisplayWrapper } from './ProductListDisplay.styled';
 
 interface ProductListDisplayProps {
   cartItemQuantity: (cartItems: any | []) => void;
+  selCategory: (data: any | "") => void;
 }
 interface userProfile {
   name: any;
@@ -27,7 +28,7 @@ interface userProfile {
 }
 
 const ProductListDisplay: FC<ProductListDisplayProps> = ({
-  cartItemQuantity,
+  cartItemQuantity, selCategory
 }) => {
   const location = useLocation();
   const { data, setData } = useData();
@@ -112,6 +113,7 @@ const ProductListDisplay: FC<ProductListDisplayProps> = ({
     if (selectedCategory) {
       const pathParts = location.pathname.split('/');
       const lastPart = pathParts[pathParts.length - 1];
+      selCategory(selectedCategory);
       setProductCode(lastPart);
       getProductByHcodeFun({ code: lastPart });
     }

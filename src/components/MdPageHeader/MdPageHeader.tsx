@@ -35,9 +35,14 @@ const MdPageHeader: FC<MdPageHeaderProps> = ({routeFlag,selectedCategory,pageNam
             </a>
         
             {/* Category Title */}
+            {pageName.includes("productlist")? (
             <div className="text-sm font-semibold text-white text-center flex-grow">
               {selectedCategory}
-            </div>
+            </div>):(
+                         <div className="text-sm font-semibold text-white text-center flex-grow">
+                         {pageName}
+                       </div>
+            )}
         
             {/* Search Button */}
             <a

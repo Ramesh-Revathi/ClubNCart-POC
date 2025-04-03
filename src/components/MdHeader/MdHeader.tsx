@@ -16,8 +16,8 @@ const MdHeader: FC<MdHeaderProps> = () => {
         <div className="flex w-full flex-col">
           <div className="flex justify-between mb-3">
             <div className="cursor-pointer flex-1">
-              <div className="font-medium text-xl bg-gray">Delivery in 20 mins</div>
-              <div className="text-sm text-gray-subtext truncate w-[250px] bg-gray">Mylapore, Chennai</div>
+              <div className="text-xl bg-gray text-green-900 font-bold">Delivery in 20 mins</div>
+              <div className="text-sm text-gray-subtext truncate w-[250px] bg-gray text-green-700 font-bold">Mylapore, Chennai</div>
             </div>
             <Link to="/profile">
               <div
